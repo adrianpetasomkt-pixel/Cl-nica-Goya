@@ -6,3 +6,7 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 npm-debug.log*
+
+# saída do arquivo de demonstração (regerar com: npm run demo)
+.demo-build
+demo

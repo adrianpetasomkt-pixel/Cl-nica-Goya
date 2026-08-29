@@ -33,7 +33,20 @@ npm run build      # typecheck + build de produção em dist/
 npm run preview    # serve o dist/ localmente, em http://localhost:4173
 npm run typecheck  # só o TypeScript
 npm run pendencias # lista todo {{PENDENTE: ...}} com arquivo e linha
+npm run demo       # gera demo/clinica-goya-DEMO.html
 ```
+
+### Arquivo de demonstração
+
+`npm run demo` gera **`demo/clinica-goya-DEMO.html`**: o site inteiro num
+arquivo só, com CSS, JavaScript, as duas fontes e o favicon embutidos. Abre com
+dois cliques, sem servidor e sem internet — serve para mandar ao cliente ver e
+navegar enquanto não existe domínio.
+
+O único ponto que não funciona ali é o mapa, que precisa buscar o embed do
+Google. Todo o resto é real: menu, FAQ, âncoras, foco de teclado, telefone.
+
+O arquivo é gerado, não versionado. Regere depois de cada mudança.
 
 O `build` roda `tsc -b` antes do Vite: erro de tipo quebra o build, não passa batido.
 
