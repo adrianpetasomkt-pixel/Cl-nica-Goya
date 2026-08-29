@@ -33,8 +33,26 @@ npm run build      # typecheck + build de produção em dist/
 npm run preview    # serve o dist/ localmente, em http://localhost:4173
 npm run typecheck  # só o TypeScript
 npm run pendencias # lista todo {{PENDENTE: ...}} com arquivo e linha
+npm run imagens    # processa fotos-originais/ e gera as versões do site
 npm run demo       # gera demo/clinica-goya-DEMO.html
 ```
+
+### Fotos
+
+Coloque os originais em `fotos-originais/` (`recepcao.jpg`, `consultorio.jpg`)
+e rode:
+
+```bash
+npm run imagens && npm run build
+```
+
+O script gera WebP e JPEG em várias larguras, aplica correção tonal
+conservadora, monta a imagem de compartilhamento e atualiza
+`src/data/fotos.gerado.ts`. Enquanto o arquivo não existir, o componente
+`<Foto>` cai sozinho no espaço reservado — a página nunca quebra.
+
+O script **não amplia**: se o original for pequeno, o resultado é pequeno.
+Detalhes e resoluções mínimas em `fotos-originais/LEIA-ME.md`.
 
 ### Arquivo de demonstração
 

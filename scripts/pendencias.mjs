@@ -12,7 +12,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 const RAIZ = process.cwd();
-const IGNORAR = new Set(['node_modules', 'dist', '.git', 'scripts']);
+const IGNORAR = new Set(['node_modules', 'dist', '.git', 'scripts', '.demo-build', 'demo', 'fotos-originais']);
 const EXTENSOES = /\.(html|tsx?|css|xml|txt|json)$/;
 
 /** Ocorrências que são citação do padrão em comentário ou tipo, não pendência real. */

@@ -128,7 +128,31 @@ export const site = {
       'Boa parte de quem chega aqui trabalha no centro. São comerciantes, empresários e funcionários que resolvem o dente no intervalo do expediente, num endereço que já está no caminho. Quando o atendimento resolve, eles voltam trazendo a família — e é assim que a clínica cresceu.',
       'Os profissionais que atendem na Goya têm experiência relevante em suas áreas.',
     ],
-    foto: '{{PENDENTE: fotos reais da clínica e da equipe, com autorização de uso de imagem}}' as Pendencia,
+  },
+
+  /*
+   * Fotos reais da clínica. O texto alternativo é conteúdo e mora aqui; os
+   * caminhos e as dimensões são gerados por `npm run imagens` em
+   * src/data/fotos.gerado.ts.
+   *
+   * `nome` casa com o arquivo em fotos-originais/ (sem extensão). Enquanto o
+   * arquivo não existir, o componente <Foto> cai no espaço reservado sozinho.
+   */
+  fotos: {
+    recepcao: {
+      nome: 'recepcao',
+      alt: 'Recepção da Clínica Goya: balcão claro ripado, o logotipo Goya Odonto & Saúde na parede e um arranjo de flores sobre o balcão.',
+      pendencia:
+        '{{PENDENTE: arquivo da foto da recepção em fotos-originais/recepcao.jpg, na maior resolução disponível}}' as Pendencia,
+    },
+    consultorio: {
+      nome: 'consultorio',
+      alt: 'Consultório da Clínica Goya: cadeira odontológica com equipo e bancada branca, ao lado de uma janela com plantas.',
+      pendencia:
+        '{{PENDENTE: arquivo da foto do consultório em fotos-originais/consultorio.jpg, na maior resolução disponível}}' as Pendencia,
+    },
+    equipe:
+      '{{PENDENTE: foto da equipe da clínica, com autorização de uso de imagem dos profissionais}}' as Pendencia,
   },
 
   /**

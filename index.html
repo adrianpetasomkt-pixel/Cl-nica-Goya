@@ -44,16 +44,23 @@
       content="Clínica odontológica no Centro de Cuiabá, na R. Cândido Mariano, 909. Atendimento por convênio e particular, em diversas especialidades. Ligue (65) 3322-3264."
     />
     <meta property="og:url" content="{{PENDENTE: URL final do site (domínio contratado)}}" />
-    <!-- A imagem de compartilhamento depende de foto real da clínica e do logotipo. -->
+    <!--
+      A imagem de compartilhamento é gerada por `npm run imagens` em
+      /fotos/og.jpg, a partir da foto da recepção. Falta só o domínio: og:image
+      exige URL absoluta.
+
+      og:image:width e og:image:height ficaram de fora de propósito — o tamanho
+      real depende da resolução do original enviado (1200x630 se ele tiver
+      1200px ou mais, 600x315 abaixo disso), e declarar um valor errado é pior
+      do que não declarar.
+    -->
     <meta
       property="og:image"
-      content="{{PENDENTE: imagem de compartilhamento 1200x630px, a partir de foto real da clínica e do logotipo}}"
+      content="{{PENDENTE: URL final do site (domínio contratado) + /fotos/og.jpg — a imagem em si já é gerada por npm run imagens}}"
     />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="{{PENDENTE: texto alternativo da imagem de compartilhamento}}"
+      content="Recepção da Clínica Goya, com o logotipo Goya Odonto &amp; Saúde na parede."
     />
 
     <!-- Twitter Card -->
@@ -65,7 +72,7 @@
     />
     <meta
       name="twitter:image"
-      content="{{PENDENTE: imagem de compartilhamento 1200x630px, a partir de foto real da clínica e do logotipo}}"
+      content="{{PENDENTE: URL final do site (domínio contratado) + /fotos/og.jpg — a imagem em si já é gerada por npm run imagens}}"
     />
 
     <!--

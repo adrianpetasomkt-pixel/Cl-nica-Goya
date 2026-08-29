@@ -1,6 +1,6 @@
 import { site } from '../data/site';
 import { TituloSecao } from './ui/TituloSecao';
-import { Placeholder } from './ui/Placeholder';
+import { Foto } from './ui/Foto';
 
 /**
  * Reescrita do texto institucional oficial da clínica, mantendo o sentido.
@@ -30,12 +30,13 @@ export function Sobre() {
           </div>
         </div>
 
-        <div className="lg:pt-24">
-          <Placeholder
-            descricao="equipe ou ambiente interno da clínica, foto real"
-            marcador={site.sobre.foto}
-            width={600}
-            height={700}
+        <div className="lg:pt-28">
+          <Foto
+            nome={site.fotos.consultorio.nome}
+            alt={site.fotos.consultorio.alt}
+            pendencia={site.fotos.consultorio.pendencia}
+            reserva={{ largura: 900, altura: 600 }}
+            sizes="(min-width: 1024px) 34vw, calc(100vw - 2.5rem)"
             escuro
           />
         </div>

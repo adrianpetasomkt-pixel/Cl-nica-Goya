@@ -4,7 +4,7 @@ Tudo que o site precisa e que **não** está confirmado. Nenhum destes campos fo
 preenchido com valor plausível, exemplo ou aproximação: onde falta dado, existe
 um marcador `{{PENDENTE: ...}}` visível na página e no código.
 
-**34 pendências**, agrupadas abaixo em quatro blocos. Os dois primeiros são
+**35 pendências**, agrupadas abaixo em quatro blocos. Os dois primeiros são
 bloqueadores — o site não deve ir ao ar sem eles.
 
 Para regerar esta lista com os números de linha atualizados:
@@ -28,9 +28,9 @@ nome e CRO do responsável técnico em todo material de divulgação.
 
 | # | Onde está | O que perguntar ao cliente |
 |---|---|---|
-| 1 | `src/data/site.ts:199` | Qual é o número de inscrição da Clínica Goya no CRO-MT? (Aparece no alvará e na documentação da pessoa jurídica.) |
-| 2 | `src/data/site.ts:201` | Qual o nome completo do responsável técnico da clínica, exatamente como registrado no CRO? |
-| 3 | `src/data/site.ts:203` | Qual o número de CRO do responsável técnico, com a UF? |
+| 1 | `src/data/site.ts:223` | Qual é o número de inscrição da Clínica Goya no CRO-MT? (Aparece no alvará e na documentação da pessoa jurídica.) |
+| 2 | `src/data/site.ts:225` | Qual o nome completo do responsável técnico da clínica, exatamente como registrado no CRO? |
+| 3 | `src/data/site.ts:227` | Qual o número de CRO do responsável técnico, com a UF? |
 
 **Impacto:** rodapé (`src/components/Footer.tsx`, seção "Registro profissional").
 O arquivo tem um bloco de comentário no topo sinalizando o bloqueio.
@@ -71,17 +71,17 @@ Precisam estar resolvidos no momento de publicar, não antes.
 |---|---|---|
 | 12 | `index.html:30` | Qual o domínio contratado do site? (Para a tag `canonical`.) |
 | 13 | `index.html:46` | *(mesmo domínio — `og:url`)* |
-| 14 | `index.html:91` | *(mesmo domínio — `url` do JSON-LD)* |
+| 14 | `index.html:98` | *(mesmo domínio — `url` do JSON-LD)* |
 | 15 | `public/sitemap.xml:8` | *(mesmo domínio — `<loc>` do sitemap)* |
 | 16 | `public/robots.txt:7` | *(mesmo domínio — diretiva `Sitemap`)* |
-| 17 | `index.html:103` | Qual a latitude exata da clínica, em graus decimais? |
-| 18 | `index.html:104` | Qual a longitude exata da clínica, em graus decimais? |
+| 17 | `index.html:110` | Qual a latitude exata da clínica, em graus decimais? |
+| 18 | `index.html:111` | Qual a longitude exata da clínica, em graus decimais? |
 | 19 | `src/data/site.ts:68` | *(mesma latitude — usada no texto da seção Localização)* |
 | 20 | `src/data/site.ts:70` | *(mesma longitude)* |
-| 21 | `index.html:111` | *(horário de fechamento da segunda — `openingHoursSpecification` do JSON-LD)* |
-| 22 | `index.html:115` | Quais dias da semana, de terça a sábado, a clínica funciona? |
-| 23 | `index.html:116` | Qual o horário de abertura desses dias? |
-| 24 | `index.html:117` | Qual o horário de fechamento desses dias? |
+| 21 | `index.html:118` | *(horário de fechamento da segunda — `openingHoursSpecification` do JSON-LD)* |
+| 22 | `index.html:122` | Quais dias da semana, de terça a sábado, a clínica funciona? |
+| 23 | `index.html:123` | Qual o horário de abertura desses dias? |
+| 24 | `index.html:124` | Qual o horário de fechamento desses dias? |
 | 25 | `src/data/site.ts:73` | Qual o link do perfil da clínica no Google Business? (Para o botão "ler as 1.352 avaliações".) |
 
 ### Duas decisões que valem explicar
@@ -106,19 +106,40 @@ O site funciona sem eles; fica melhor com eles.
 | # | Onde está | O que perguntar ao cliente |
 |---|---|---|
 | 26 | `src/data/site.ts:36` | Existe logotipo da clínica? Enviar em SVG ou PNG com fundo transparente. Existe manual de marca, ou ao menos as cores e as fontes oficiais? |
-| 27 | `src/data/site.ts:131` | Enviar fotos reais da fachada, da recepção e da equipe, com autorização de uso de imagem dos profissionais. |
-| 28 | `index.html:50` | Imagem de compartilhamento (1200×630px) para links no WhatsApp e redes. Depende do logotipo e das fotos. |
-| 29 | `index.html:56` | Texto alternativo dessa imagem de compartilhamento. |
-| 30 | `index.html:68` | *(mesma imagem — `twitter:image`)* |
-| 31 | `src/data/site.ts:204` | Qual a razão social da empresa? |
-| 32 | `src/data/site.ts:205` | Qual o CNPJ? |
-| 33 | `src/data/site.ts:209` | A clínica tem Instagram? Qual o link? |
-| 34 | `src/data/site.ts:210` | A clínica tem Facebook? Qual o link? |
+| 27 | `src/data/site.ts:146` | **Arquivo** da foto da recepção, na maior resolução que existir. Salvar em `fotos-originais/recepcao.jpg`. |
+| 28 | `src/data/site.ts:152` | **Arquivo** da foto do consultório, na maior resolução que existir. Salvar em `fotos-originais/consultorio.jpg`. |
+| 29 | `src/data/site.ts:155` | Existe foto da equipe? Exige autorização de uso de imagem por escrito dos profissionais que aparecerem. |
+| 30 | `index.html:59` | *(só o domínio — a imagem de compartilhamento em si já é gerada por `npm run imagens`)* |
+| 31 | `index.html:75` | *(mesmo — `twitter:image`)* |
+| 32 | `src/data/site.ts:228` | Qual a razão social da empresa? |
+| 33 | `src/data/site.ts:229` | Qual o CNPJ? |
+| 34 | `src/data/site.ts:233` | A clínica tem Instagram? Qual o link? |
+| 35 | `src/data/site.ts:234` | A clínica tem Facebook? Qual o link? |
 
-**Sobre as fotos:** os espaços estão reservados com placeholders sólidos, na
-proporção correta e com `alt` descritivo. **Não** foram preenchidos com imagem
-de banco — foto genérica de dentista sorrindo comunica "site genérico" e
-enfraquece exatamente a credibilidade que as 1.352 avaliações construíram.
+### Sobre as fotos
+
+As duas fotos — recepção e consultório — **já estão identificadas e com o lugar
+delas reservado no site**, com texto alternativo escrito. Falta só o arquivo.
+
+Assim que os arquivos estiverem em `fotos-originais/`, um comando fecha tudo:
+
+```bash
+npm run imagens && npm run build
+```
+
+O script gera as versões responsivas em WebP e JPEG, aplica correção tonal
+conservadora, monta a imagem de compartilhamento e atualiza o manifesto. Os
+espaços reservados somem sozinhos. Detalhes em `fotos-originais/LEIA-ME.md`.
+
+**Resolução importa.** As fotos do perfil do Google Business vêm por volta de
+680px de largura — dá para usar, mas fica mole em tela grande, e a imagem de
+compartilhamento sai em 600×315 em vez dos 1200×630 ideais. Se existirem os
+arquivos originais da câmera ou do celular, use esses. O script nunca amplia:
+ampliar não cria detalhe, só borra.
+
+**Nada de banco de imagens.** Foto genérica de dentista sorrindo comunica "site
+genérico" e enfraquece exatamente a credibilidade que as 1.352 avaliações
+construíram.
 
 **Sobre a paleta:** as cores e fontes em `tailwind.config.js` e `DESIGN.md` são
 uma **proposta**, feita sem a identidade visual da clínica. Estão centralizadas

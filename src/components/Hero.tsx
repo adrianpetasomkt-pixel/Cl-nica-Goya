@@ -1,7 +1,7 @@
 import { site } from '../data/site';
 import { AcaoTelefone, AcaoWhatsApp } from './ui/Acoes';
 import { Estrelas } from './ui/Estrelas';
-import { Placeholder } from './ui/Placeholder';
+import { Foto } from './ui/Foto';
 
 /**
  * A tese da página: quem somos, a prova de que dá para confiar, e como falar
@@ -68,11 +68,13 @@ export function Hero() {
             </p>
           </div>
 
-          <Placeholder
-            descricao="fachada ou recepção da clínica, foto real"
-            marcador={site.sobre.foto}
-            width={800}
-            height={600}
+          <Foto
+            nome={site.fotos.recepcao.nome}
+            alt={site.fotos.recepcao.alt}
+            pendencia={site.fotos.recepcao.pendencia}
+            reserva={{ largura: 800, altura: 600 }}
+            sizes="(min-width: 1024px) 40vw, calc(100vw - 2.5rem)"
+            prioritaria
           />
         </div>
       </div>
