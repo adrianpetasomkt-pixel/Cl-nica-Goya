@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# A diretiva Sitemap só pode entrar com a URL absoluta do domínio real —
+# uma URL inválida invalida o arquivo inteiro para os rastreadores.
+# Antes de publicar, descomente a linha abaixo com o domínio contratado:
+# {{PENDENTE: URL final do site (domínio contratado), para a diretiva Sitemap}}
+# Sitemap: https://DOMINIO-REAL/sitemap.xml

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1D5647" />
+
+    <!--
+      ATENÇÃO — TODO O SEO CRÍTICO VIVE NESTE ARQUIVO, ESTÁTICO.
+      O React renderiza no cliente; nada abaixo pode ser injetado por
+      JavaScript, senão crawler e preview de link não enxergam.
+
+      Os marcadores {{PENDENTE: ...}} abaixo PRECISAM ser substituídos antes
+      da publicação. Ver PENDENCIAS.md.
+    -->
+
+    <title>Clínica Goya — Dentista no Centro de Cuiabá | Goya Odonto &amp; Saúde</title>
+    <meta
+      name="description"
+      content="Clínica odontológica no Centro de Cuiabá, na R. Cândido Mariano, 909. Atendimento por convênio e particular, em diversas especialidades. Ligue (65) 3322-3264."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="geo.region" content="BR-MT" />
+    <meta name="geo.placename" content="Cuiabá" />
+    <!--
+      A tag <link rel="canonical"> só entra quando o domínio for definido. Um
+      canonical apontando para um valor inválido é pior do que canonical
+      nenhum — o Google pode desconsiderar a página inteira. Descomente e
+      preencha antes de publicar:
+      {{PENDENTE: URL final do site (domínio contratado), para a tag canonical}}
+      <link rel="canonical" href="https://DOMINIO-REAL/" />
+    -->
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Clínica Goya" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta
+      property="og:title"
+      content="Clínica Goya — Dentista no Centro de Cuiabá"
+    />
+    <meta
+      property="og:description"
+      content="Clínica odontológica no Centro de Cuiabá, na R. Cândido Mariano, 909. Atendimento por convênio e particular, em diversas especialidades. Ligue (65) 3322-3264."
+    />
+    <meta property="og:url" content="{{PENDENTE: URL final do site (domínio contratado)}}" />
+    <!-- A imagem de compartilhamento depende de foto real da clínica e do logotipo. -->
+    <meta
+      property="og:image"
+      content="{{PENDENTE: imagem de compartilhamento 1200x630px, a partir de foto real da clínica e do logotipo}}"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="{{PENDENTE: texto alternativo da imagem de compartilhamento}}"
+    />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Clínica Goya — Dentista no Centro de Cuiabá" />
+    <meta
+      name="twitter:description"
+      content="Clínica odontológica no Centro de Cuiabá, na R. Cândido Mariano, 909. Atendimento por convênio e particular, em diversas especialidades. Ligue (65) 3322-3264."
+    />
+    <meta
+      name="twitter:image"
+      content="{{PENDENTE: imagem de compartilhamento 1200x630px, a partir de foto real da clínica e do logotipo}}"
+    />
+
+    <!--
+      JSON-LD — schema.org/Dentist
+
+      NÃO INCLUI aggregateRating, DE PROPÓSITO. A nota 5,0 com 1.352 avaliações
+      é do perfil da clínica no Google, não coletada neste site. Marcar
+      avaliação de terceiro como própria contraria as diretrizes de rich
+      results do Google e pode custar a exibição do resultado. A nota aparece
+      visualmente na página, com atribuição ao Google — sem markup.
+
+      `geo`, `openingHoursSpecification` e `url` carregam marcadores de
+      pendência. O JSON é válido, mas esses três campos precisam de valor real
+      antes da publicação, sob pena de o rich result ser recusado.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Clínica Goya",
+        "alternateName": "Goya Odonto & Saúde",
+        "description": "Clínica odontológica no Centro de Cuiabá, com atendimento por convênio e particular em diversas especialidades odontológicas.",
+        "url": "{{PENDENTE: URL final do site (domínio contratado)}}",
+        "telephone": "+55 65 3322-3264",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "R. Cândido Mariano, 909 — Centro Norte",
+          "addressLocality": "Cuiabá",
+          "addressRegion": "MT",
+          "postalCode": "78043-415",
+          "addressCountry": "BR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "{{PENDENTE: latitude da clínica em graus decimais}}",
+          "longitude": "{{PENDENTE: longitude da clínica em graus decimais}}"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "https://schema.org/Monday",
+            "opens": "07:00",
+            "closes": "{{PENDENTE: horário de fechamento da segunda-feira}}"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "{{PENDENTE: demais dias de funcionamento, de terça a sábado}}",
+            "opens": "{{PENDENTE: horário de abertura dos demais dias}}",
+            "closes": "{{PENDENTE: horário de fechamento dos demais dias}}"
+          }
+        ],
+        "areaServed": [
+          { "@type": "City", "name": "Cuiabá" },
+          { "@type": "AdministrativeArea", "name": "Mato Grosso" }
+        ]
+      }
+    </script>
+
+    <!--
+      Fontes auto-hospedadas: nenhuma requisição a terceiro antes da primeira
+      pintura. As duas são necessárias na primeira dobra, então vão em preload.
+    -->
+    <link
+      rel="preload"
+      href="/fonts/fraunces-latin-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/inter-latin-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!--
+      Sem JavaScript o React não renderiza. O essencial — quem é, onde fica e
+      como falar — precisa continuar disponível de qualquer forma. Só dado
+      confirmado aqui.
+    -->
+    <noscript>
+      <div style="font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1.25rem; color: #16211C; line-height: 1.6">
+        <h1 style="font-size: 1.5rem">Clínica Goya — Goya Odonto &amp; Saúde</h1>
+        <p>Clínica odontológica no Centro de Cuiabá. Atendimento por convênio e particular.</p>
+        <p>
+          <strong>Telefone:</strong>
+          <a href="tel:+556533223264" style="color: #A8460F">(65) 3322-3264</a>
+        </p>
+        <address style="font-style: normal">
+          R. Cândido Mariano, 909 — Centro Norte, Cuiabá — MT, CEP 78043-415
+        </address>
+        <p>Esta página funciona melhor com JavaScript ativado.</p>
+      </div>
+    </noscript>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  A URL abaixo precisa do domínio real antes da publicação. Um sitemap com
+  endereço inválido é pior do que sitemap nenhum. Ver PENDENCIAS.md.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{{PENDENTE: URL final do site (domínio contratado)}}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

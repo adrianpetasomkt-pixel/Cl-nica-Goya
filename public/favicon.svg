@@ -1,0 +1,11 @@
+<!--
+  Favicon provisório: monograma tipográfico nas cores da paleta proposta.
+  Substituir pelo logotipo real da clínica quando ele for enviado.
+  Ver PENDENCIAS.md.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Clínica Goya">
+  <rect width="64" height="64" rx="6" fill="#1D5647"/>
+  <rect x="14" y="46" width="36" height="4" fill="#A8460F"/>
+  <text x="32" y="40" font-family="Georgia, serif" font-size="34" font-weight="700"
+        fill="#F6F1E7" text-anchor="middle">G</text>
+</svg>
