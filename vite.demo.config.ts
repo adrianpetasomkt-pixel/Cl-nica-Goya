@@ -5,6 +5,8 @@ import react from '@vitejs/plugin-react';
 // IIFE, para a página funcionar aberta direto do disco (file://), sem servidor.
 export default defineConfig({
   plugins: [react()],
+  // Liga o modo de apresentação. Ver src/vite-env.d.ts.
+  define: { __MODO_DEMO__: 'true' },
   build: {
     outDir: '.demo-build',
     emptyOutDir: true,

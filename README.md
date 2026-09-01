@@ -1,195 +1,128 @@
-# Site institucional — Clínica Goya (Goya Odonto & Saúde)
+# Rizzit Odontologia Premium — site
 
-Landing page única da Clínica Goya, clínica odontológica no centro de Cuiabá-MT.
-Destino dos cliques vindos do perfil da clínica no Google Business.
+Site institucional da Rizzit Odontologia Premium (Jardim Cuiabá, Cuiabá — MT),
+com um gerador de **demonstração autocontida** para apresentar ao cliente antes
+de existir domínio.
 
-O único trabalho desta página é converter o visitante em contato — ligação ou
-WhatsApp. Tudo que não serve a isso ficou de fora.
-
-> ## ⚠️ Este site ainda não pode ser publicado
->
-> Faltam o registro da clínica no CRO-MT e o nome e CRO do responsável
-> técnico. A publicidade de clínica odontológica de pessoa jurídica é regida
-> pelo Código de Ética Odontológica e pelas resoluções do CFO, que obrigam a
-> exibição desses dados em todo material de divulgação.
->
-> Ver **[PENDENCIAS.md](./PENDENCIAS.md)**, bloco 1.
+Estado atual: **demonstração pronta para apresentação.** O site ainda não pode
+ser publicado — falta conteúdo da clínica e os dados de registro exigidos pelo
+CFO. Ver `PENDENCIAS.md`.
 
 ---
 
-## Rodar
-
-Requer Node 18 ou superior.
+## Comandos
 
 ```bash
 npm install
-npm run dev        # servidor de desenvolvimento em http://localhost:5173
+
+npm run dev          # desenvolvimento
+npm run build        # build de produção (modo "andaime")
+npm run demo         # gera demo/rizzit-DEMO.html — arquivo único, autocontido
+npm run auditar      # gera a demo e a audita em 4 telas
+npm run pendencias   # lista o que ainda não é dado confirmado
+npm run contraste    # verifica a paleta contra a WCAG 2.1 AA
+npm run typecheck    # TypeScript estrito
+npm run arte         # regera as artes conceituais de fundo
+npm run imagens      # processa fotos-originais/ -> public/fotos/
 ```
-
-## Build e verificação
-
-```bash
-npm run build      # typecheck + build de produção em dist/
-npm run preview    # serve o dist/ localmente, em http://localhost:4173
-npm run typecheck  # só o TypeScript
-npm run pendencias # lista todo {{PENDENTE: ...}} com arquivo e linha
-npm run imagens    # processa fotos-originais/ e gera as versões do site
-npm run demo       # gera demo/clinica-goya-DEMO.html
-```
-
-### Fotos
-
-Coloque os originais em `fotos-originais/` (`recepcao.jpg`, `consultorio.jpg`)
-e rode:
-
-```bash
-npm run imagens && npm run build
-```
-
-O script gera WebP e JPEG em várias larguras, aplica correção tonal
-conservadora, monta a imagem de compartilhamento e atualiza
-`src/data/fotos.gerado.ts`. Enquanto o arquivo não existir, o componente
-`<Foto>` cai sozinho no espaço reservado — a página nunca quebra.
-
-O script **não amplia**: se o original for pequeno, o resultado é pequeno.
-Detalhes e resoluções mínimas em `fotos-originais/LEIA-ME.md`.
-
-### Arquivo de demonstração
-
-`npm run demo` gera **`demo/clinica-goya-DEMO.html`**: o site inteiro num
-arquivo só, com CSS, JavaScript, as duas fontes e o favicon embutidos. Abre com
-dois cliques, sem servidor e sem internet — serve para mandar ao cliente ver e
-navegar enquanto não existe domínio.
-
-O único ponto que não funciona ali é o mapa, que precisa buscar o embed do
-Google. Todo o resto é real: menu, FAQ, âncoras, foco de teclado, telefone.
-
-O arquivo é gerado, não versionado. Regere depois de cada mudança.
-
-O `build` roda `tsc -b` antes do Vite: erro de tipo quebra o build, não passa batido.
-
-## Publicar
-
-Site estático, sem backend. O `dist/` é o que vai ao ar.
-
-**Vercel**
-
-```bash
-npm i -g vercel
-vercel            # a primeira vez pergunta o projeto; aceitar os padrões
-vercel --prod
-```
-
-Vercel detecta o Vite sozinho. Se pedir configuração manual: build `npm run build`,
-diretório de saída `dist`.
-
-**Netlify**
-
-```bash
-npm i -g netlify-cli
-netlify deploy --build --prod
-```
-
-Ou conectar o repositório pelo painel, com build `npm run build` e publish `dist`.
-
-Como é página única sem router, **não é preciso** configurar redirect de SPA.
-
-### Antes do primeiro deploy
-
-1. Preencher os bloqueadores do bloco 1 do [PENDENCIAS.md](./PENDENCIAS.md).
-2. Definir o domínio e, em `index.html`, `public/robots.txt` e `public/sitemap.xml`, descomentar as linhas de `canonical`, `Sitemap` e `<loc>` com a URL real.
-3. Substituir `geo` e `openingHoursSpecification` no JSON-LD do `index.html` por coordenadas e horários reais.
-4. Rodar `npm run pendencias` e conferir o que sobrou.
 
 ---
 
-## Como mexer no conteúdo
+## A demonstração
 
-**Todo o texto vive em [`src/data/site.ts`](./src/data/site.ts).** Nenhum
-conteúdo é escrito dentro de componente. Quando o cliente mandar os dados que
-faltam, a atualização acontece nesse arquivo e em mais nenhum — com uma exceção
-necessária: o SEO estático (title, description, Open Graph, JSON-LD) fica no
-`index.html`, porque precisa existir sem JavaScript, e o React renderiza no
-cliente.
+`npm run demo` produz **um único arquivo HTML** com tudo dentro: CSS,
+JavaScript, as duas fontes, o favicon e todas as imagens em data URI. Abre com
+dois toques, sem servidor e sem internet.
 
-As listas de especialidades e convênios estão **vazias de propósito**. Os
-componentes tratam os dois estados: com lista, montam o grid; sem lista, mostram
-o que se sabe, exibem o marcador de pendência e oferecem o telefone. Basta
-preencher o array para a seção virar grid, sem tocar em componente.
+> **Por que as imagens precisam estar embutidas**
+>
+> Aberto por `file://` — que é como o cliente abre no celular — um caminho
+> como `/arte/atmosfera-hero.jpg` resolve para a **raiz do sistema de
+> arquivos**, não para a pasta do HTML. Toda imagem aparece quebrada. Servido
+> por HTTP no desktop o mesmo arquivo funciona, e é por isso que o defeito só
+> aparecia no iPhone.
+>
+> `scripts/demo.mjs` embute cada imagem e tem uma trava no fim: se sobrar
+> qualquer referência externa, o build falha em vez de gerar um arquivo que só
+> quebra na frente do cliente.
 
-O mesmo vale para o WhatsApp: preencher `contato.whatsapp` transforma os três
-CTAs (hero, fechamento e botão flutuante) em links `wa.me` reais.
+Um detalhe relacionado: no modo demonstração o componente `<Foto>` emite um
+`src` único em vez de `srcset`. Data URI em base64 contém vírgula, e `srcset`
+é uma lista separada por vírgula — as duas coisas juntas produzem um srcset
+ilegível e a imagem não aparece.
 
-### 🚫 A regra que não se quebra
+### Modo demonstração vs. produção
 
-**Nunca escreva no site informação que não tenha vindo do cliente.** É um site
-de saúde, de um cliente real, sujeito a fiscalização do CRO — dado inventado
-gera dano real. Não preencha com exemplo, valor plausível ou "algo parecido que
-dá para ajustar depois". O que falta vira `{{PENDENTE: ...}}` e entra no
-`PENDENCIAS.md`.
+A flag `__MODO_DEMO__` (definida nos configs do Vite) muda dois
+comportamentos:
 
-Em particular, **não invente**: especialidades, convênios, nomes/fotos/CRO de
-profissionais, horários, ano de fundação, número de pacientes, prêmios,
-certificações, preços ou depoimentos. As únicas avaliações permitidas são as
-três reais do Google já transcritas.
+| | `npm run build` | `npm run demo` |
+|---|---|---|
+| Espaços reservados | modo **andaime** — feios de propósito | modo **vitrine** — desenhados |
+| Faixa de aviso | ausente | presente, no rodapé da tela |
 
-E **não inclua**: imagens de antes e depois, promessa de resultado, preços ou
-promoções, gatilho de escassez, conteúdo que sugira diagnóstico, ou o termo
-"especialista" ligado a área não reconhecida pelo CFO. As restrições completas
-estão no bloco de comentário no topo de [`src/App.tsx`](./src/App.tsx).
+Os dois dizem que o conteúdo é reservado. A diferença é de acabamento, nunca
+de honestidade. Ver `DESIGN.md`, seção 6.
+
+---
+
+## Regra de ouro do conteúdo
+
+Todo valor em `src/data/site.ts` é de um destes três tipos, e o tipo é
+explícito no código:
+
+- **CONFIRMADO** — verificado em fonte pública, com a fonte anotada no
+  comentário. Ver `rizzit/PESQUISA-RIZZIT.md`.
+- **PRESUMIDO** — `presumir(valor, motivo)`. Usado na demonstração para ela
+  funcionar, mas **não verificado**. Sai em `npm run pendencias`.
+- **PENDENTE** — `{{PENDENTE: ...}}`. Não temos, e o site não finge que tem.
+
+Nada de valor plausível ou "algo parecido que dá para ajustar depois". Este é
+um site de saúde sujeito à fiscalização do CRO — dado inventado gera dano real,
+a pacientes e à clínica.
+
+Hoje **nenhum tratamento, profissional, horário ou avaliação foi confirmado**,
+e por isso nenhum aparece no site. Não é omissão: é a única postura defensável.
+
+---
+
+## Bloqueio de publicação
+
+Publicidade de clínica odontológica (pessoa jurídica) exige, por norma do CFO,
+a exibição de:
+
+1. nome e inscrição da **clínica** no CRO-MT;
+2. nome e CRO do **responsável técnico**.
+
+Nenhum dos dois foi obtido. **O site não pode ir ao ar sem eles.** A
+demonstração pode ser apresentada: não está no ar e não é material de
+divulgação ao público.
 
 ---
 
 ## Estrutura
 
 ```
-index.html                 SEO estático: title, description, OG, Twitter, JSON-LD
 src/
-  App.tsx                  ordem das seções + as regras de conformidade, em comentário
-  data/site.ts             TODO o conteúdo textual e de contato, tipado
-  index.css                tokens em CSS, @font-face, foco de teclado, utilidades
-  components/              um arquivo por seção da página
-    ui/                    primitivas: Pendente, Placeholder, Acoes, Estrelas, TituloSecao
-public/
-  fonts/                   Fraunces e Inter, subset latino, auto-hospedadas
-  robots.txt  sitemap.xml  favicon.svg
-scripts/pendencias.mjs     inventário dos marcadores
-DESIGN.md                  sistema de tokens e por que cada escolha
-PENDENCIAS.md              as 34 pendências, com arquivo, linha e a pergunta a fazer
+  data/site.ts            fonte única de conteúdo — só se edita aqui
+  data/fotos.gerado.ts    GERADO por npm run imagens
+  components/
+    ui/                   primitivas: Foto, Placeholder, Pendente,
+                          ModuloVazio, Revelar, TituloSecao, Acoes
+    *.tsx                 seções da página
+scripts/
+  arte.mjs                artes conceituais de fundo (gráficos, não fotos)
+  imagens.mjs             fotos originais -> versões responsivas
+  demo.mjs                arquivo único autocontido
+  auditar.mjs             auditoria em 4 telas via file://
+  contraste.mjs           WCAG 2.1 AA
+  pendencias.mjs          o que falta
+fotos-originais/          onde as fotos da clínica devem ser colocadas
+rizzit/PESQUISA-RIZZIT.md pesquisa que originou o conteúdo, com fontes
 ```
 
-## Stack e o porquê
+## Histórico
 
-**Vite + React + TypeScript + Tailwind.** Página única com âncoras, sem router,
-sem backend, sem formulário. Todos os CTAs são `tel:` e `wa.me`.
-
-O site precisa carregar rápido em 4G, ser barato de hospedar e não ter
-superfície de manutenção. Formulário de contato exigiria backend, tratamento de
-dado pessoal de paciente sob a LGPD e alguém checando a caixa de entrada — nada
-disso existe hoje.
-
-Sem biblioteca de UI pronta e sem biblioteca de animação: os componentes são
-próprios e o CSS é Tailwind com tokens em `tailwind.config.js`.
-
-### Decisões de performance
-
-- **Fontes auto-hospedadas** (`public/fonts/`), variáveis, subset latino, `font-display: swap`. Sem requisição a terceiro bloqueando a primeira pintura.
-- **Mapa sob demanda.** O iframe do Google Maps só é criado quando o visitante clica em "Ver no mapa" — em 4G ele derrubaria o LCP, e não é o que o visitante veio ver.
-- **Sem imagem no caminho crítico.** Os placeholders são CSS. `aspect-ratio` reserva a caixa, o que mantém o CLS em zero quando as fotos reais entrarem.
-
-## Medições
-
-Lighthouse mobile, sobre o `dist/` servido por `npm run preview`:
-
-| | Meta | Medido |
-|---|---|---|
-| Performance | ≥ 90 | **99** |
-| Acessibilidade | ≥ 95 | **100** |
-| Boas práticas | — | **100** |
-| SEO | 100 | **100** |
-| CLS | — | **0** |
-
-Verificado também: sem rolagem horizontal de 320px a 1440px; travessia por
-teclado passando pelos 19 elementos focáveis com anel de foco visível em todos;
-alvos de toque ≥ 44×44px; contraste de texto AA ou melhor em toda a paleta
-(as razões medidas estão no [DESIGN.md](./DESIGN.md)).
+Este repositório começou como o site da Clínica Goya. O projeto da Rizzit
+reaproveita a mesma arquitetura; o código da Goya continua no histórico do git
+(commit `26b0088`).

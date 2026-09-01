@@ -1,5 +1,5 @@
 {
-  "name": "clinica-goya",
+  "name": "rizzit-odontologia-premium",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -10,7 +10,10 @@
     "typecheck": "tsc -b --force",
     "pendencias": "node scripts/pendencias.mjs",
     "demo": "vite build --config vite.demo.config.ts && node scripts/demo.mjs",
-    "imagens": "node scripts/imagens.mjs"
+    "imagens": "node scripts/imagens.mjs",
+    "arte": "node scripts/arte.mjs",
+    "contraste": "node scripts/contraste.mjs",
+    "auditar": "npm run demo && node scripts/auditar.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -21,6 +24,7 @@
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "playwright": "^1.49.0",
     "postcss": "^8.4.49",
     "sharp": "^0.35.4",
     "tailwindcss": "^3.4.17",

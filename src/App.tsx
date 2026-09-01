@@ -1,6 +1,6 @@
 /*
  * ===========================================================================
- * CLÍNICA GOYA — REGRAS QUE VALEM PARA QUEM EDITAR ESTE SITE DEPOIS
+ * RIZZIT ODONTOLOGIA PREMIUM — REGRAS PARA QUEM EDITAR ESTE SITE DEPOIS
  *
  * Este é o site de uma clínica odontológica real, sujeita ao Código de Ética
  * Odontológica e às resoluções do CFO. As restrições abaixo não são
@@ -14,32 +14,50 @@
  *   • Conteúdo que sugira diagnóstico ou orientação clínica pelo site.
  *   • O termo "especialista" ligado a área não reconhecida pelo CFO.
  *   • Superlativo não verificável ("a melhor de Cuiabá", "referência em").
- *     O argumento desta página é a nota 5,0 com 1.352 avaliações no Google,
- *     que é verificável e mais forte que qualquer adjetivo.
+ *   • Nome ou foto de profissional sem o número de CRO junto.
  *
- * E NUNCA INVENTE DADO. Especialidade, convênio, nome de profissional, CRO,
- * horário, ano de fundação, número de pacientes, prêmio ou certificação só
- * entram no site depois de confirmados pela clínica. O que falta vira
+ * E NUNCA INVENTE DADO. Tratamento, nome de profissional, CRO, horário,
+ * número de pacientes, prêmio, certificação, equipamento ou nota de avaliação
+ * só entram depois de confirmados pela clínica. O que falta vira
  * `{{PENDENTE: ...}}` em src/data/site.ts e é listado em PENDENCIAS.md.
  *
  * ⚠️  O SITE NÃO PODE SER PUBLICADO enquanto o CRO da clínica e o nome e CRO
  *     do responsável técnico não estiverem preenchidos. Ver Footer.tsx.
+ *
+ * A DEMONSTRAÇÃO (`npm run demo`) pode ser apresentada como está: ela não
+ * está no ar, não é material de divulgação, e carrega a faixa de aviso.
  * ===========================================================================
  */
 
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { FaixaConfianca } from './components/FaixaConfianca';
-import { Especialidades } from './components/Especialidades';
+import { Fatos } from './components/Fatos';
 import { Sobre } from './components/Sobre';
-import { Convenios } from './components/Convenios';
-import { Avaliacoes } from './components/Avaliacoes';
+import { Tratamentos } from './components/Tratamentos';
+import { Estrutura } from './components/Estrutura';
+import { Equipe } from './components/Equipe';
+import { Prova } from './components/Prova';
 import { Localizacao } from './components/Localizacao';
 import { Faq } from './components/Faq';
 import { CtaFinal } from './components/CtaFinal';
 import { Footer } from './components/Footer';
 import { WhatsAppFlutuante } from './components/WhatsAppFlutuante';
+import { FaixaDemo } from './components/FaixaDemo';
 
+/*
+ * A ordem das seções é a jornada de conversão, e cada passo tem uma função:
+ *
+ *   Hero        quem é, onde fica, o que fazer agora
+ *   Fatos       os três fatos verificáveis, para ancorar a confiança cedo
+ *   Sobre       contexto da clínica
+ *   Tratamentos o que o visitante veio procurar
+ *   Estrutura   a prova visual do "premium" do nome
+ *   Equipe      quem vai atender (com CRO)
+ *   Prova       o que outros pacientes dizem
+ *   Localização o obstáculo prático: dá para chegar?
+ *   FAQ         as últimas objeções
+ *   CTA final   a decisão
+ */
 export default function App() {
   return (
     <>
@@ -51,11 +69,12 @@ export default function App() {
 
       <main id="conteudo">
         <Hero />
-        <FaixaConfianca />
-        <Especialidades />
+        <Fatos />
         <Sobre />
-        <Convenios />
-        <Avaliacoes />
+        <Tratamentos />
+        <Estrutura />
+        <Equipe />
+        <Prova />
         <Localizacao />
         <Faq />
         <CtaFinal />
@@ -63,6 +82,7 @@ export default function App() {
 
       <Footer />
       <WhatsAppFlutuante />
+      <FaixaDemo />
     </>
   );
 }

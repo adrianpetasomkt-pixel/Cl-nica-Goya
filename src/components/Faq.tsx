@@ -1,59 +1,59 @@
 import { site, ehPendencia } from '../data/site';
 import { TituloSecao } from './ui/TituloSecao';
 import { Pendente } from './ui/Pendente';
+import { Revelar } from './ui/Revelar';
 
 /**
- * Só perguntas que dá para responder com dado confirmado — onde fica, como é o
- * atendimento, como agendar. Nenhuma resposta clínica, nenhuma orientação de
- * tratamento, nenhum diagnóstico: o site não pode sugerir conduta.
+ * Dúvidas.
  *
- * Onde a resposta depende de dado que não temos, a pergunta continua na lista
- * com a parte que sabemos e um marcador de pendência no lugar do resto.
+ * `<details>`/`<summary>` nativos: acessíveis de fábrica, funcionam sem
+ * JavaScript e custam zero. Uma sanfona feita à mão aqui só adicionaria bug de
+ * teclado.
  *
- * Usa <details>/<summary> nativos: acessíveis por teclado e funcionam sem
- * nenhum JavaScript de acordeão.
+ * Nenhuma resposta clínica. As três primeiras perguntas têm resposta porque o
+ * dado está confirmado; as duas últimas mostram a pendência em vez de uma
+ * resposta plausível.
  */
 export function Faq() {
   return (
-    <section id="faq" className="bg-white py-secao" aria-labelledby="titulo-faq">
-      <div className="container-conteudo">
-        <div className="max-w-prosa">
-        <TituloSecao etiqueta="Dúvidas frequentes" id="titulo-faq">
-          Perguntas que a recepção mais ouve
-        </TituloSecao>
+    <section id="faq" className="bg-osso py-secao" aria-labelledby="titulo-faq">
+      <div className="container-conteudo max-w-3xl">
+        <Revelar>
+          <TituloSecao etiqueta="Dúvidas" id="titulo-faq">
+            Perguntas frequentes
+          </TituloSecao>
+        </Revelar>
 
-          <ul className="border-t border-pedra/30">
-          {site.faq.map((item) => (
-            <li key={item.pergunta} className="border-b border-pedra/30">
-              <details className="group">
-                <summary className="alvo-toque w-full cursor-pointer list-none justify-between gap-4 py-5 text-left font-display text-h3 font-semibold text-verde marker:content-none">
-                  <span>{item.pergunta}</span>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
+        <Revelar atraso={100}>
+          <div className="border-t border-linha">
+            {site.faq.map((item) => (
+              <details key={item.pergunta} className="group border-b border-linha">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left font-display text-h3 font-semibold text-petroleo marker:hidden [&::-webkit-details-marker]:hidden">
+                  {item.pergunta}
+                  <span
                     aria-hidden="true"
-                    className="mt-1 shrink-0 text-ocre transition-transform group-open:rotate-45"
+                    className="shrink-0 text-bronze transition-transform duration-200 group-open:rotate-45"
                   >
-                    <path
-                      d="M12 5v14M5 12h14"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M12 5v14M5 12h14"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
                 </summary>
-                <div className="pb-6 pr-8">
-                  <p className="text-base text-tinta">{item.resposta}</p>
+                <div className="pb-6">
+                  <p className="max-w-prosa text-base text-tinta">{item.resposta}</p>
                   {ehPendencia(item.pendencia) ? (
                     <Pendente className="mt-4">{item.pendencia}</Pendente>
                   ) : null}
                 </div>
               </details>
-            </li>
-          ))}
-          </ul>
-        </div>
+            ))}
+          </div>
+        </Revelar>
       </div>
     </section>
   );

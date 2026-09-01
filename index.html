@@ -2,8 +2,8 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1D5647" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0E1417" />
 
     <!--
       ATENÇÃO — TODO O SEO CRÍTICO VIVE NESTE ARQUIVO, ESTÁTICO.
@@ -14,95 +14,82 @@
       da publicação. Ver PENDENCIAS.md.
     -->
 
-    <title>Clínica Goya — Dentista no Centro de Cuiabá | Goya Odonto &amp; Saúde</title>
+    <title>Rizzit Odontologia Premium — Clínica odontológica no Jardim Cuiabá, Cuiabá (MT)</title>
     <meta
       name="description"
-      content="Clínica odontológica no Centro de Cuiabá, na R. Cândido Mariano, 909. Atendimento por convênio e particular, em diversas especialidades. Ligue (65) 3322-3264."
+      content="Rizzit Odontologia Premium: clínica odontológica na Rua das Dálias, 582, Jardim Cuiabá, Cuiabá (MT). Em atividade desde 2021. Agende pelo telefone (65) 98150-6894."
     />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="geo.region" content="BR-MT" />
     <meta name="geo.placename" content="Cuiabá" />
     <!--
       A tag <link rel="canonical"> só entra quando o domínio for definido. Um
-      canonical apontando para um valor inválido é pior do que canonical
-      nenhum — o Google pode desconsiderar a página inteira. Descomente e
-      preencha antes de publicar:
+      canonical apontando para valor inválido é pior que canonical nenhum — o
+      Google pode desconsiderar a página inteira. Descomente e preencha:
       {{PENDENTE: URL final do site (domínio contratado), para a tag canonical}}
       <link rel="canonical" href="https://DOMINIO-REAL/" />
     -->
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Clínica Goya" />
+    <meta property="og:site_name" content="Rizzit Odontologia Premium" />
     <meta property="og:locale" content="pt_BR" />
-    <meta
-      property="og:title"
-      content="Clínica Goya — Dentista no Centro de Cuiabá"
-    />
+    <meta property="og:title" content="Rizzit Odontologia Premium — Jardim Cuiabá, Cuiabá (MT)" />
     <meta
       property="og:description"
-      content="Clínica odontológica no Centro de Cuiabá, na R. Cândido Mariano, 909. Atendimento por convênio e particular, em diversas especialidades. Ligue (65) 3322-3264."
+      content="Clínica odontológica na Rua das Dálias, 582, Jardim Cuiabá, Cuiabá (MT). Em atividade desde 2021."
     />
     <meta property="og:url" content="{{PENDENTE: URL final do site (domínio contratado)}}" />
     <!--
-      A imagem de compartilhamento é gerada por `npm run imagens` em
-      /fotos/og.jpg, a partir da foto da recepção. Falta só o domínio: og:image
-      exige URL absoluta.
-
-      og:image:width e og:image:height ficaram de fora de propósito — o tamanho
-      real depende da resolução do original enviado (1200x630 se ele tiver
-      1200px ou mais, 600x315 abaixo disso), e declarar um valor errado é pior
-      do que não declarar.
+      A imagem de compartilhamento sai de `npm run imagens` em /fotos/og.jpg,
+      a partir da foto da recepção — que ainda não existe. Enquanto não houver
+      foto real da clínica, NÃO apontamos og:image para a arte conceitual: a
+      prévia no WhatsApp seria um gradiente abstrato, que não diz nada sobre a
+      clínica e ainda dá a impressão de site inacabado.
     -->
     <meta
       property="og:image"
-      content="{{PENDENTE: URL final do site (domínio contratado) + /fotos/og.jpg — a imagem em si já é gerada por npm run imagens}}"
-    />
-    <meta
-      property="og:image:alt"
-      content="Recepção da Clínica Goya, com o logotipo Goya Odonto &amp; Saúde na parede."
+      content="{{PENDENTE: foto da recepção + domínio contratado, para gerar a imagem de compartilhamento em /fotos/og.jpg}}"
     />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Clínica Goya — Dentista no Centro de Cuiabá" />
+    <meta name="twitter:title" content="Rizzit Odontologia Premium — Jardim Cuiabá, Cuiabá (MT)" />
     <meta
       name="twitter:description"
-      content="Clínica odontológica no Centro de Cuiabá, na R. Cândido Mariano, 909. Atendimento por convênio e particular, em diversas especialidades. Ligue (65) 3322-3264."
-    />
-    <meta
-      name="twitter:image"
-      content="{{PENDENTE: URL final do site (domínio contratado) + /fotos/og.jpg — a imagem em si já é gerada por npm run imagens}}"
+      content="Clínica odontológica na Rua das Dálias, 582, Jardim Cuiabá, Cuiabá (MT). Em atividade desde 2021."
     />
 
     <!--
       JSON-LD — schema.org/Dentist
 
-      NÃO INCLUI aggregateRating, DE PROPÓSITO. A nota 5,0 com 1.352 avaliações
-      é do perfil da clínica no Google, não coletada neste site. Marcar
-      avaliação de terceiro como própria contraria as diretrizes de rich
-      results do Google e pode custar a exibição do resultado. A nota aparece
-      visualmente na página, com atribuição ao Google — sem markup.
+      NÃO INCLUI aggregateRating, DE PROPÓSITO: não temos nota nem quantidade
+      de avaliações. Marcar nota inventada é, além de mentira, motivo de
+      penalização nas diretrizes de rich results do Google.
 
-      `geo`, `openingHoursSpecification` e `url` carregam marcadores de
-      pendência. O JSON é válido, mas esses três campos precisam de valor real
-      antes da publicação, sob pena de o rich result ser recusado.
+      NÃO INCLUI makesOffer / medicalSpecialty: nenhum tratamento foi
+      confirmado.
+
+      `geo`, `openingHoursSpecification` e `url` carregam marcadores. O JSON é
+      válido, mas esses campos precisam de valor real antes da publicação.
     -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Dentist",
-        "name": "Clínica Goya",
-        "alternateName": "Goya Odonto & Saúde",
-        "description": "Clínica odontológica no Centro de Cuiabá, com atendimento por convênio e particular em diversas especialidades odontológicas.",
+        "name": "Rizzit Odontologia Premium",
+        "legalName": "RIZZIT ODONTOLOGIA PREMIUM LTDA",
+        "description": "Clínica odontológica no Jardim Cuiabá, em Cuiabá (MT), em atividade desde 2021.",
         "url": "{{PENDENTE: URL final do site (domínio contratado)}}",
-        "telephone": "+55 65 3322-3264",
+        "telephone": "+55 65 98150-6894",
+        "foundingDate": "2021-04-08",
+        "taxID": "41.500.681/0001-34",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "R. Cândido Mariano, 909 — Centro Norte",
+          "streetAddress": "Rua das Dálias, 582 — Quadra 51, Lote 03",
           "addressLocality": "Cuiabá",
           "addressRegion": "MT",
-          "postalCode": "78043-415",
+          "postalCode": "78043-152",
           "addressCountry": "BR"
         },
         "geo": {
@@ -113,17 +100,12 @@
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": "https://schema.org/Monday",
-            "opens": "07:00",
-            "closes": "{{PENDENTE: horário de fechamento da segunda-feira}}"
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": "{{PENDENTE: demais dias de funcionamento, de terça a sábado}}",
-            "opens": "{{PENDENTE: horário de abertura dos demais dias}}",
-            "closes": "{{PENDENTE: horário de fechamento dos demais dias}}"
+            "dayOfWeek": "{{PENDENTE: dias de atendimento}}",
+            "opens": "{{PENDENTE: horário de abertura}}",
+            "closes": "{{PENDENTE: horário de fechamento}}"
           }
         ],
+        "sameAs": ["https://www.instagram.com/rizzitodonto/"],
         "areaServed": [
           { "@type": "City", "name": "Cuiabá" },
           { "@type": "AdministrativeArea", "name": "Mato Grosso" }
@@ -157,19 +139,18 @@
 
     <!--
       Sem JavaScript o React não renderiza. O essencial — quem é, onde fica e
-      como falar — precisa continuar disponível de qualquer forma. Só dado
-      confirmado aqui.
+      como falar — precisa continuar disponível. Só dado confirmado aqui.
     -->
     <noscript>
-      <div style="font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1.25rem; color: #16211C; line-height: 1.6">
-        <h1 style="font-size: 1.5rem">Clínica Goya — Goya Odonto &amp; Saúde</h1>
-        <p>Clínica odontológica no Centro de Cuiabá. Atendimento por convênio e particular.</p>
+      <div style="font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1.25rem; color: #14181B; line-height: 1.6">
+        <h1 style="font-size: 1.5rem">Rizzit Odontologia Premium</h1>
+        <p>Clínica odontológica no Jardim Cuiabá, em Cuiabá (MT). Em atividade desde 2021.</p>
         <p>
           <strong>Telefone:</strong>
-          <a href="tel:+556533223264" style="color: #A8460F">(65) 3322-3264</a>
+          <a href="tel:+5565981506894" style="color: #8A5E2A">(65) 98150-6894</a>
         </p>
         <address style="font-style: normal">
-          R. Cândido Mariano, 909 — Centro Norte, Cuiabá — MT, CEP 78043-415
+          Rua das Dálias, 582 — Quadra 51, Lote 03, Jardim Cuiabá, Cuiabá — MT, CEP 78043-152
         </address>
         <p>Esta página funciona melhor com JavaScript ativado.</p>
       </div>

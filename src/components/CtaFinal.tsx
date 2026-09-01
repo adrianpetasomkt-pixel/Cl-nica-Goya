@@ -1,32 +1,49 @@
 import { site } from '../data/site';
 import { AcaoTelefone, AcaoWhatsApp } from './ui/Acoes';
+import { Revelar } from './ui/Revelar';
 
 /**
- * Fechamento: os dois caminhos de contato, repetidos. Não existe formulário —
- * ele exigiria backend, tratamento de dado pessoal de paciente sob a LGPD e
- * alguém checando a caixa de entrada. Ligação e WhatsApp resolvem melhor.
+ * Chamada final.
+ *
+ * É o único ponto da página onde os dois canais aparecem lado a lado com o
+ * mesmo peso. Nas outras seções o CTA tem contexto — aqui ele É o contexto.
+ *
+ * Sem gatilho de escassez, sem contagem regressiva, sem "vagas limitadas".
+ * Além de barato, isso é vedado em publicidade odontológica.
  */
 export function CtaFinal() {
   return (
-    <section className="sobre-escuro bg-tinta py-secao text-areia" aria-labelledby="titulo-cta">
-      <div className="container-conteudo max-w-prosa text-center">
-        <span className="regua mx-auto mb-6" aria-hidden="true" />
-        <h2 id="titulo-cta" className="text-h2 font-semibold text-areia">
-          Fale com a {site.identidade.nomeFantasia}
-        </h2>
-        <p className="mx-auto mt-5 text-lead text-areia/85">
-          O agendamento é por telefone. Ligue e a recepção confirma o convênio, a especialidade e o
-          horário disponível.
-        </p>
+    <section
+      className="sobre-escuro relative isolate overflow-hidden bg-noite py-secao text-osso"
+      aria-labelledby="titulo-cta"
+    >
+      <img
+        src="/arte/atmosfera-cta.jpg"
+        alt=""
+        aria-hidden="true"
+        width={1920}
+        height={900}
+        className="absolute inset-0 -z-10 h-full w-full object-cover"
+      />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-noite/70" />
 
-        <div className="mt-9 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
-          <AcaoTelefone variante="primario" />
-          <AcaoWhatsApp variante="secundario-escuro" escuro className="items-center" />
-        </div>
+      <div className="container-conteudo">
+        <Revelar>
+          <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+            <span className="regua-clara mb-8" aria-hidden="true" />
+            <h2 id="titulo-cta" className="text-h2 font-semibold text-osso">
+              Agende sua avaliação na Rizzit
+            </h2>
+            <p className="mt-5 max-w-prosa text-lead text-osso/85">
+              {site.endereco.logradouro} — {site.endereco.bairro}, {site.endereco.cidade}.
+            </p>
 
-        <p className="mt-8 text-sm text-areia/70">
-          {site.endereco.completo}
-        </p>
+            <div className="mt-10 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
+              <AcaoWhatsApp variante="primario" rotulo="Agendar pelo WhatsApp" />
+              <AcaoTelefone variante="secundario-escuro" />
+            </div>
+          </div>
+        </Revelar>
       </div>
     </section>
   );

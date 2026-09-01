@@ -1,11 +1,10 @@
 <!--
-  Favicon provisório: monograma tipográfico nas cores da paleta proposta.
-  Substituir pelo logotipo real da clínica quando ele for enviado.
-  Ver PENDENCIAS.md.
+  Favicon provisório: o "R" da Rizzit em bronze sobre o fundo noite, na mesma
+  paleta do site. NÃO é o logotipo da clínica — ele ainda não foi enviado.
+  Substituir quando o material da marca chegar.
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Clínica Goya">
-  <rect width="64" height="64" rx="6" fill="#1D5647"/>
-  <rect x="14" y="46" width="36" height="4" fill="#A8460F"/>
-  <text x="32" y="40" font-family="Georgia, serif" font-size="34" font-weight="700"
-        fill="#F6F1E7" text-anchor="middle">G</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="10" fill="#0E1417"/>
+  <text x="32" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="40"
+        font-weight="700" fill="#E0B87C" text-anchor="middle">R</text>
 </svg>

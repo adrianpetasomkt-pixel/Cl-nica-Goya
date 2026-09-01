@@ -1,53 +1,50 @@
+import { useEffect, useState } from 'react';
 import { site, ehPendencia } from '../data/site';
+import { IconeWhatsApp } from './ui/Acoes';
 
 /**
- * Botão flutuante de WhatsApp, presente em toda a rolagem.
+ * Botão flutuante de WhatsApp.
  *
- * O número ainda não foi informado (o telefone confirmado é fixo). Enquanto
- * for pendência, o botão fica visivelmente marcado como indisponível, com
- * `aria-disabled` e rótulo explícito — nunca um link que não leva a lugar
- * nenhum. Basta preencher `contato.whatsapp` em src/data/site.ts para ele
- * virar um link real.
+ * Só aparece depois que o visitante passa do hero — no topo o CTA já está na
+ * tela, e um botão flutuante sobreposto à primeira dobra é ruído.
+ *
+ * No celular fica acima da área de gesto do iOS (`safe-area-inset-bottom`),
+ * senão a barra de início do iPhone come metade do alvo.
  */
 export function WhatsAppFlutuante() {
-  const numero = site.contato.whatsapp;
-  const pendente = ehPendencia(numero);
+  const [visivel, setVisivel] = useState(false);
+  const whatsapp = site.contato.whatsapp;
 
-  const icone = (
-    <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        d="M12 2a10 10 0 0 0-8.6 15.05L2 22l5.08-1.33A10 10 0 1 0 12 2Zm5.1 14.1c-.24.67-1.4 1.28-1.94 1.32-.5.04-.98.22-3.3-.69-2.78-1.1-4.53-3.94-4.67-4.13-.13-.19-1.1-1.47-1.1-2.8 0-1.33.7-1.98.94-2.25a1 1 0 0 1 .72-.34h.52c.17 0 .39-.06.6.46l.83 2c.07.14.11.3.02.48l-.3.46-.44.48c-.14.14-.29.3-.12.58.16.28.73 1.2 1.56 1.95 1.07.95 1.97 1.25 2.25 1.39.28.14.44.12.6-.07l.87-1c.2-.24.37-.18.62-.09l1.77.84c.26.12.43.19.5.29.06.1.06.58-.18 1.24Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
+  useEffect(() => {
+    const aoRolar = () => setVisivel(window.scrollY > window.innerHeight * 0.75);
+    aoRolar();
+    window.addEventListener('scroll', aoRolar, { passive: true });
+    return () => window.removeEventListener('scroll', aoRolar);
+  }, []);
 
-  if (pendente) {
-    return (
-      <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-2">
-        <span className="etiqueta rounded border border-pedra bg-areia px-2 py-1 text-pedra shadow-none">
-          WhatsApp a confirmar
-        </span>
-        <button
-          type="button"
-          aria-disabled="true"
-          aria-label="Falar no WhatsApp — indisponível: o número de WhatsApp da clínica ainda não foi informado. Use o telefone (65) 3322-3264."
-          className="flex h-14 w-14 cursor-not-allowed items-center justify-center rounded-full border-2 border-dashed border-pedra bg-areia text-pedra"
-        >
-          {icone}
-        </button>
-      </div>
-    );
-  }
+  if (ehPendencia(whatsapp)) return null;
+
+  /*
+   * Na demonstração a faixa de aviso ocupa a base da tela. Sem esta folga o
+   * botão flutuante cai em cima dela e, no celular, ainda por cima do
+   * conteúdo da seção — os dois elementos disputando o mesmo canto.
+   */
+  const folgaFaixa = site.modoDemo ? '3.25rem' : '0rem';
 
   return (
     <a
-      href={`https://wa.me/${numero.replace(/\D/g, '')}`}
+      href={`https://wa.me/${whatsapp.valor}`}
       rel="noopener"
-      aria-label={`Falar com a ${site.identidade.nomeFantasia} no WhatsApp`}
-      className="fixed bottom-4 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-verde text-areia transition-colors hover:bg-ocre"
+      target="_blank"
+      aria-hidden={!visivel}
+      tabIndex={visivel ? 0 : -1}
+      style={{ bottom: `calc(1.25rem + ${folgaFaixa} + env(safe-area-inset-bottom, 0px))` }}
+      className={`fixed right-5 z-40 inline-flex min-h-toque items-center gap-2 rounded-full bg-bronze px-4 py-3 font-semibold text-white shadow-lg shadow-noite/30 transition-all duration-300 hover:bg-tinta sm:px-5 sm:py-3.5 ${
+        visivel ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+      }`}
     >
-      {icone}
+      <IconeWhatsApp />
+      <span className="text-sm">Agendar</span>
     </a>
   );
 }

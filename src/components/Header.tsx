@@ -1,15 +1,28 @@
 import { useEffect, useState } from 'react';
 import { site } from '../data/site';
-import { AcaoTelefone } from './ui/Acoes';
+import { AcaoTelefone, AcaoWhatsApp } from './ui/Acoes';
 
 /**
  * Header fixo.
  *
- * Regra do briefing: no mobile o telefone NÃO pode sumir dentro do menu
- * hambúrguer. Ele fica na barra, sempre visível, ao lado do botão de menu.
+ * Duas decisões que valem para o celular:
+ *
+ * 1. O telefone NUNCA entra no menu hambúrguer. Fica na barra, sempre visível,
+ *    em qualquer largura. Enterrar o contato dentro de dois toques é o erro
+ *    mais caro que um site de clínica comete.
+ * 2. O fundo começa transparente sobre o hero escuro e só ganha cor depois de
+ *    rolar. Sem isso, uma barra sólida corta a primeira dobra em duas.
  */
 export function Header() {
   const [aberto, setAberto] = useState(false);
+  const [rolou, setRolou] = useState(false);
+
+  useEffect(() => {
+    const aoRolar = () => setRolou(window.scrollY > 24);
+    aoRolar();
+    window.addEventListener('scroll', aoRolar, { passive: true });
+    return () => window.removeEventListener('scroll', aoRolar);
+  }, []);
 
   // Escape fecha o menu — quem abriu com teclado precisa conseguir sair dele.
   useEffect(() => {
@@ -22,18 +35,26 @@ export function Header() {
   }, [aberto]);
 
   return (
-    <header className="sobre-escuro fixed inset-x-0 top-0 z-50 border-b border-verde bg-verde">
+    <header
+      className={`sobre-escuro fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        rolou || aberto ? 'border-b border-osso/10 bg-noite/95 backdrop-blur' : 'bg-transparent'
+      }`}
+    >
       <div className="container-conteudo flex items-center justify-between gap-4 py-3">
-        {/* Logotipo — pendente. Espaço reservado e evidente, não um ícone de dente. */}
         <a
           href="#inicio"
           className="alvo-toque shrink-0 flex-col items-start justify-center gap-0 text-left"
         >
-          <span className="font-display text-lg font-bold leading-none text-areia min-[400px]:text-xl">
+          {/*
+            Logotipo pendente. Até ele chegar, a marca é tipográfica: o nome em
+            Fraunces com o tracking aberto. É uma solução de design, não um
+            espaço vazio — e não é um ícone de dente genérico.
+          */}
+          <span className="font-display text-xl font-bold leading-none tracking-tight text-osso">
             {site.identidade.nomeFantasia}
           </span>
-          <span className="hidden text-[0.7rem] uppercase tracking-[0.18em] text-areia/70 sm:block">
-            {site.identidade.nomeCompleto}
+          <span className="mt-0.5 hidden text-[0.62rem] uppercase tracking-[0.3em] text-champanhe sm:block">
+            Odontologia Premium
           </span>
         </a>
 
@@ -43,7 +64,7 @@ export function Header() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="alvo-toque whitespace-nowrap rounded px-3 text-sm font-medium text-areia transition-colors hover:text-ocre-claro"
+                  className="alvo-toque whitespace-nowrap rounded px-3 text-sm font-medium text-osso/85 transition-colors hover:text-champanhe"
                 >
                   {item.rotulo}
                 </a>
@@ -53,20 +74,18 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          {/* Telefone sempre visível, em qualquer largura. */}
           {/*
-            O telefone fica na barra em QUALQUER largura — nunca dentro do
-            hambúrguer. Abaixo de 400px o número completo não cabe ao lado do
-            botão de menu, então o rótulo visível encurta; o nome acessível do
-            link continua sendo o número inteiro.
+            Abaixo de 400px o número completo não cabe ao lado do botão de
+            menu, então o rótulo visível encurta para "Ligar". O nome acessível
+            do link continua sendo o número inteiro.
           */}
           <AcaoTelefone
             variante="primario"
-            className="!px-3 text-sm sm:!px-5 sm:text-base"
+            className="!px-4 !py-2.5 text-sm sm:!px-6"
             rotulo={
               <>
-                <span className="min-[400px]:hidden">Ligar</span>
-                <span className="hidden whitespace-nowrap min-[400px]:inline">
+                <span className="min-[420px]:hidden">Ligar</span>
+                <span className="hidden whitespace-nowrap min-[420px]:inline">
                   {site.contato.telefone.exibicao}
                 </span>
               </>
@@ -78,7 +97,7 @@ export function Header() {
             onClick={() => setAberto((v) => !v)}
             aria-expanded={aberto}
             aria-controls="menu-mobile"
-            className="alvo-toque w-toque rounded border-2 border-areia/50 text-areia lg:hidden"
+            className="alvo-toque w-toque rounded border border-osso/35 text-osso transition-colors hover:border-osso lg:hidden"
           >
             <span className="sr-only">{aberto ? 'Fechar menu' : 'Abrir menu'}</span>
             <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
@@ -86,14 +105,14 @@ export function Header() {
                 <path
                   d="M6 6l12 12M18 6L6 18"
                   stroke="currentColor"
-                  strokeWidth="2.2"
+                  strokeWidth="1.8"
                   strokeLinecap="round"
                 />
               ) : (
                 <path
                   d="M4 7h16M4 12h16M4 17h16"
                   stroke="currentColor"
-                  strokeWidth="2.2"
+                  strokeWidth="1.8"
                   strokeLinecap="round"
                 />
               )}
@@ -102,25 +121,35 @@ export function Header() {
         </div>
       </div>
 
+      {/*
+        Menu mobile. Fecha ao escolher um item — deixar o painel aberto sobre a
+        seção recém-ancorada é o defeito clássico de menu de template.
+      */}
       <nav
         id="menu-mobile"
         aria-label="Seções da página"
         hidden={!aberto}
-        className="border-t border-areia/20 bg-verde lg:hidden"
+        className="border-t border-osso/10 bg-noite lg:hidden"
       >
-        <ul className="container-conteudo flex flex-col py-2">
+        <ul className="container-conteudo flex flex-col py-3">
           {site.navegacao.map((item) => (
-            <li key={item.href}>
+            <li key={item.href} className="border-b border-osso/10 last:border-0">
               <a
                 href={item.href}
                 onClick={() => setAberto(false)}
-                className="alvo-toque w-full justify-start rounded px-1 text-base font-medium text-areia"
+                className="alvo-toque w-full justify-between rounded px-1 py-1 text-base font-medium text-osso"
               >
                 {item.rotulo}
+                <span aria-hidden="true" className="text-champanhe">
+                  →
+                </span>
               </a>
             </li>
           ))}
         </ul>
+        <div className="container-conteudo pb-5">
+          <AcaoWhatsApp variante="secundario-escuro" className="w-full" />
+        </div>
       </nav>
     </header>
   );

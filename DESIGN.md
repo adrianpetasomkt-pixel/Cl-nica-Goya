@@ -1,157 +1,201 @@
-# Sistema de design — Clínica Goya
+# Direção de arte — Rizzit Odontologia Premium
 
-> Plano feito **antes** do código, conforme a seção 8 do briefing. Todas as cores
-> vivem em `tailwind.config.js` (`theme.extend.colors`). Trocar a paleta quando a
-> clínica enviar a identidade visual é editar **um** bloco, não varrer componentes.
->
-> **Status: proposta a validar.** Não temos a identidade visual da clínica
-> (ver `PENDENCIAS.md`).
+O que foi decidido, e por quê. Serve para as próximas alterações não
+desmancharem a coerência do conjunto.
 
 ---
 
-## 1. O que este design precisa resolver
+## 1. O problema de partida
 
-O visitante chega com dor de dente, com um convênio na mão, ou procurando dentista
-para a família, e decide em menos de 30 segundos. O design existe para que ele
-encontre, nessa ordem: **a prova de que a clínica é confiável** (5,0 com 1.352
-avaliações), **a confirmação de que atende o caso dele** (convênio e particular,
-diversas especialidades), e **o botão de falar agora**.
+A clínica tem "Premium" no próprio nome. É uma declaração de posicionamento
+explícita — e hoje não há nada, do lado digital, que a sustente: não existe
+site, o Instagram tem ~2,4 mil seguidores e ~39 posts, e não há prova pública
+organizada.
 
-Restrições que vêm do negócio, não do gosto:
+Some-se a isso a restrição que definiu o projeto inteiro: **a pesquisa não
+confirmou nenhum tratamento, nenhum profissional, nenhum horário, nenhuma
+avaliação e nenhuma foto.** O que existe é nome, endereço, telefone, CNPJ,
+data de abertura e Instagram.
 
-| Fato do briefing | Consequência de design |
-|---|---|
-| Clínica de **centro urbano**, público que sai do trabalho no almoço | Sobriedade. Nada de linguagem de spa ou de luxo. |
-| É **saúde**, não estética | Legibilidade acima de sofisticação. Sem vitrine. |
-| Diferencial é **confiança que passa de geração** | Calor humano. Paleta quente, não fria. |
-| **Cuiabá**: luz forte, calor, tela no sol | Contraste alto e tipografia grande, não fiapos de 14px cinza-claro. |
-| Decisão em 30s, tráfego vindo do Google Business em 4G | Hierarquia brutal. Um assunto por dobra. |
+Um site premium normalmente se apoia em fotografia e em prova social. Aqui não
+havia nem uma nem outra. A direção de arte precisou ser construída sobre o que
+sobrou: **tipografia, cor e espaço.**
 
 ---
 
-## 2. Revisão contra o template padrão
+## 2. Paleta
 
-O briefing pede explicitamente para **não** entregar o template de clínica
-odontológica. Revisei cada escolha perguntando "eu faria isso para qualquer
-clínica?". As que falharam foram trocadas:
-
-| Escolha default (descartada) | O que ficou | Por quê |
-|---|---|---|
-| Azul-celeste / ciano "clínico" | **Verde-mata profundo** `#1D5647` | O azul-celeste é o uniforme do setor: comunica categoria, não identidade. O verde profundo é institucional e sério sem ser frio, e sustenta texto branco com 8,49:1. |
-| Gradiente suave azul→branco no hero | **Campo chapado + régua ocre** | Gradiente é decoração que custa banda e não responde a nenhuma das três perguntas do visitante. |
-| Branco puro `#FFF` como fundo | **Areia** `#F6F1E7` | Branco puro em tela sob sol de Cuiabá estoura. O off-white quente reduz o glare e puxa o "calor humano" pedido. |
-| Accent azul ou verde-menta no CTA | **Ocre queimado** `#A8460F` | O CTA precisa ser a única coisa daquela cor na tela. Ocre é a cor da terra do cerrado, contrasta com o verde por temperatura (não por luminosidade) e passa AA em branco (5,92:1). |
-| Ícone de dente vetorial | **Numeral tipográfico** (o `5,0`) | O ativo da clínica é o número, não um dente de clip-art. Ele é o ornamento. |
-| Foto de stock sorrindo | **Placeholder sólido rotulado** | Proibido pelo briefing e destrói a credibilidade que 1.352 comentários construíram. |
-| Sans-serif geométrica em tudo | **Serifa com peso no display** | Uma clínica que atende três gerações da mesma família não fala em Poppins. A serifa carrega idade e permanência; a sans carrega a leitura. |
-
----
-
-## 3. Cores
-
-Seis tokens nomeados. Todos os pares de texto abaixo foram **medidos**
-(fórmula WCAG 2.1 de luminância relativa), não estimados.
+Definida em `tailwind.config.js`, num bloco só. Nenhum componente tem cor
+hardcoded — trocar a marca é editar aquele bloco.
 
 | Token | Hex | Papel |
 |---|---|---|
-| `tinta` | `#16211C` | Texto principal. Preto com fundo verde — casa com a paleta, não briga. |
-| `verde` | `#1D5647` | Cor institucional. Superfícies escuras, faixa de confiança, rodapé, títulos. |
-| `ocre` | `#A8460F` | **Ação.** Só CTA, régua de assinatura e foco de teclado. Nada mais. |
-| `ocre-claro` | `#F5B889` | Variante do ocre para uso **sobre superfície escura** (`verde` ou `tinta`). Bem mais claro que o `ocre`: sobre `verde`, o ocre puro dá 2,83:1 e reprova. |
-| `areia` | `#F6F1E7` | Fundo da página e texto sobre superfícies escuras. |
-| `pedra` | `#635E54` | Texto secundário e bordas funcionais. |
-| `linha` | `#DED5C4` | Filete **decorativo** apenas (1,29:1 — nunca para borda que carrega informação). |
+| `noite` | `#0E1417` | Superfície escura — hero, CTA final, rodapé |
+| `petroleo` | `#123038` | Institucional escuro — títulos, seção de tratamentos |
+| `osso` | `#F5F2EC` | Fundo da página |
+| `tinta` | `#14181B` | Texto principal |
+| `bronze` | `#8A5E2A` | Ação e acento sobre fundo claro |
+| `champanhe` | `#E0B87C` | Acento sobre fundo escuro |
+| `pedra` | `#6B675F` | Texto de apoio |
+| `linha` | `#E2DCD0` | Filete decorativo — **nunca** borda funcional |
 
-### Contrastes medidos
+**A decisão central foi não usar azul.** Azul-ciano é a cor por default da
+odontologia no Brasil; qualquer clínica com ele parece qualquer outra. A
+referência aqui é hotelaria e joalheria: superfície escura profunda, um metal
+quente como único acento, e um off-white de papel.
 
-| Combinação | Razão | Nível |
-|---|---|---|
-| `tinta` sobre `areia` | 14,71:1 | AAA |
-| `verde` sobre `areia` | 7,54:1 | AAA |
-| `pedra` sobre `areia` | 5,72:1 | AA |
-| `ocre` sobre `areia` | 5,26:1 | AA |
-| `areia` sobre `verde` | 7,54:1 | AAA |
-| `areia` sobre `tinta` | 14,71:1 | AAA |
-| branco sobre `ocre` (botão) | 5,92:1 | AA |
-| `ocre-claro` sobre `verde` | 4,89:1 | AA |
-| `ocre-claro` sobre `tinta` | 9,54:1 | AAA |
+O bronze é o único acento. Um segundo acento faria a página parecer decorada.
 
-**Regras duras que saem daí:**
+### Contraste
 
-1. `linha` é decorativa. Borda que delimita um componente de verdade usa `pedra` (5,72:1, acima do mínimo 3:1 de contraste não-textual).
-2. Foco de teclado: `ocre` sobre fundo claro (5,26:1). Sobre `verde` ou `tinta`, o ocre cai para 2,83:1 e **reprova** — ali o anel de foco é `areia` (7,54:1). São duas utilidades separadas (`:focus-visible` e `.sobre-escuro :focus-visible`), não uma cor só.
-3. Pela mesma razão existem `ocre` e `ocre-claro`: é a mesma função — acento quente — em duas superfícies. Usar um no lugar do outro reprova o contraste. Toda superfície escura marca isso no código com a classe `.sobre-escuro` ou com a prop `escuro`.
-4. Nenhum hex aparece dentro de componente, nem em `fill`/`stroke` de SVG: os ícones herdam `currentColor` e a cor vem do contexto. Trocar a paleta é editar `tailwind.config.js`.
-5. Nenhuma informação é comunicada só por cor.
+Todos os pares em uso foram medidos, não estimados: `npm run contraste`.
+Roda a fórmula da WCAG 2.1 e sai com código 1 se algum reprovar.
+
+O `bronze` foi escurecido de `#9A6B33` para `#8A5E2A` justamente por causa
+disso: no tom original ele dava 4,15:1 sobre o fundo claro e reprovava no
+mínimo de 4,5:1.
 
 ---
 
-## 4. Tipografia
+## 3. Tipografia
 
-Duas famílias, papéis separados, ambas com `font-display: swap` e subset latino.
+- **Fraunces** (serifada variável) — nome da marca, títulos, números.
+- **Inter** (sem serifa variável) — texto corrido e interface.
 
-| Papel | Família | Uso |
-|---|---|---|
-| **Display** | `Fraunces` (variável, opsz 9–144, peso 600–700) | `h1`, `h2`, o numeral `5,0`, números da faixa de confiança. Serifa de contraste alto, com "idade" — é o que dá permanência e diferencia do template do setor. |
-| **Texto** | `Inter` (variável, peso 400–700) | Corpo, navegação, botões, rodapé, FAQ. Altura-x grande, ótima em 4G e em tela sob sol forte. |
+As duas são auto-hospedadas em subset latino. Nenhuma requisição a terceiro
+antes da primeira pintura: o link do Google Fonts custa uma conexão nova e
+bloqueia a renderização, o que em 4G é caro.
 
-Fallbacks reais em ambos os casos (`Georgia, serif` e `system-ui, sans-serif`),
-para que a página fique legível antes de a fonte chegar — e não só "não quebre".
+O corpo `marca` (`clamp(2.9rem, 12vw, 7rem)`) existe para uma coisa só: o nome
+"Rizzit" no hero e no rodapé. **Sem logotipo, a marca é a tipografia** — por
+isso o nome aparece grande, com o "Odontologia Premium" numa linha própria em
+caixa alta e tracking largo, em champanhe.
 
-**As duas são auto-hospedadas** (`public/fonts/`, 115 KB somados), em arquivo
-variável e subset latino. O link do Google Fonts foi descartado: é uma
-requisição de terceiro que bloqueia a renderização e abre uma conexão nova
-antes da primeira pintura — o custo exato que não se paga em 4G.
-
-### Escala (fluida, `clamp`, base 16px)
-
-| Nome | Tamanho | Uso |
-|---|---|---|
-| `display` | `clamp(2.5rem, 7vw, 4.5rem)` | `h1` do hero |
-| `numeral` | `clamp(3rem, 9vw, 5rem)` | o `5,0` |
-| `h2` | `clamp(1.75rem, 4vw, 2.75rem)` | títulos de seção |
-| `h3` | `1.25rem` | cards, perguntas do FAQ |
-| `lead` | `clamp(1.05rem, 2.2vw, 1.3rem)` | subtítulo do hero |
-| `base` | `1rem` / 1.65 | corpo |
-| `sm` | `0.9375rem` | apoio |
-| `micro` | `0.8125rem`, `tracking-wider`, caixa alta | etiquetas e o rótulo de pendência |
-
-Corpo nunca abaixo de 16px no mobile — é uma clínica cujo público inclui gente
-de 60 anos lendo no celular.
+Um ícone de dente genérico teria sido a saída fácil e a errada.
 
 ---
 
-## 5. Elemento de assinatura
+## 4. Elemento de assinatura — o filete de bronze
 
-> **A régua ocre.** Um filete de 4px em `ocre`, com 56px de largura, abre cada
-> seção logo acima do título, e reaparece em largura total sob o hero e sobre o
-> rodapé — a marca de uma ficha de prontuário preenchida à mão. É o único
-> ornamento da página, custa zero requisição, e dá ritmo à rolagem sem
-> nenhuma animação.
+Um traço de 1px por 64px, em bronze (ou champanhe sobre escuro), acima de cada
+título de seção e dentro de cada espaço reservado.
 
-Ele resolve um problema real: numa one-page longa, sem esse marcador o visitante
-perde a noção de onde uma seção termina e outra começa — especialmente rolando
-rápido no celular, que é exatamente o que esse público faz.
+É o único ornamento da página. Custa zero requisição, aparece em todo lugar e
+é o que costura hero, seções e espaços reservados num conjunto só.
+
+Está em `.regua` / `.regua-clara`, em `src/index.css`.
 
 ---
 
-## 6. Espaço, forma e movimento
+## 5. Imagens
 
-- **Grid:** contêiner máximo de 1120px, respiro lateral de 20px no mobile e 40px no desktop. Testado de 320px a 1440px.
-- **Ritmo vertical:** múltiplos de 8px. Seções com `clamp(4rem, 9vw, 7rem)` de respiro.
-- **Cantos:** 4px. Quase reto. Cantos muito arredondados leem como app de consumo; esta é uma clínica de centro.
-- **Sombra:** nenhuma sombra difusa. Profundidade vem de superfície (`areia` vs `verde`) e de bordas de 1px. Sombra custa pintura e não comunica nada aqui.
-- **Alvos de toque:** mínimo 44×44px em tudo que é clicável, sem exceção.
-- **Movimento:** só transição de cor/borda em `hover` e `focus`, ≤150ms. Nenhuma animação de entrada, nenhum parallax, nenhuma biblioteca. Tudo dentro de `@media (prefers-reduced-motion: reduce)` cai para `0.01ms`.
+### Arte conceitual gerada (`scripts/arte.mjs`)
+
+Duas imagens: fundo do hero e fundo do CTA final. São campos de cor abstratos
+— gradiente, luz e grão — gerados por código.
+
+**Não são fotos da clínica. Não são banco de imagens.** Não retratam ambiente,
+equipamento, profissional ou paciente, e não insinuam nenhum dos quatro. É
+design gráfico, e é a única categoria de imagem que pode entrar num site de
+clínica sem que ninguém tenha fotografado a clínica.
+
+Duas decisões técnicas com motivo:
+
+- **Grão a 9%.** Sem ele, o gradiente escuro vira "bola de luz" de template e,
+  em tela OLED, mostra banding.
+- **Proporção 16:9.** Na primeira versão a arte era 1800×1400; o `object-cover`
+  do hero cortava topo e base no desktop e jogava fora justamente o foco de
+  luz — a seção chegava chapada. Os focos ficam entre 0,2 e 0,62 da altura,
+  faixa que sobrevive ao corte em celular e em desktop.
+
+### Fotos reais
+
+Nenhuma existe ainda. `<Foto>` cai sozinho no espaço reservado quando o
+arquivo não está em `public/fotos/`. Ver `fotos-originais/LEIA-ME.md`.
 
 ---
 
-## 7. Como a pendência aparece
+## 6. Espaços reservados — dois modos
 
-Dado que falta não pode virar espaço em branco silencioso nem texto plausível.
-Existe um componente único (`<Pendente>`) com tratamento visual próprio:
-fundo `areia` tramado, borda tracejada em `pedra`, etiqueta "A CONFIRMAR" em
-caixa alta e o marcador literal `{{PENDENTE: ...}}` visível.
+Este é o mecanismo mais importante do projeto, porque é ele que permite
+apresentar um site bonito sem inventar conteúdo.
 
-É deliberadamente feio. Ele é um andaime, precisa parecer um andaime, e ninguém
-pode publicar o site achando que aquilo é conteúdo final.
+`Placeholder`, `Pendente` e `ModuloVazio` têm **dois modos**, escolhidos por
+`site.modoDemo` (injetado no build — ver `src/vite-env.d.ts`):
+
+### `andaime` — build de produção (`npm run build`)
+
+Deliberadamente feio: trama diagonal, borda tracejada, marcador técnico
+à mostra. É um andaime e precisa parecer um andaime, para que ninguém publique
+o site achando que aquilo é conteúdo final.
+
+### `vitrine` — build de demonstração (`npm run demo`)
+
+Desenhado. Cantos em filete de bronze, título da foto em Fraunces, descrição
+do enquadramento, e o rótulo "Espaço reservado". O cliente precisa enxergar a
+composição da página e entender o que vai ali.
+
+**Continua dizendo com todas as letras que é espaço reservado.** A diferença
+entre os dois modos é de acabamento, nunca de honestidade.
+
+O `ModuloVazio` vai além e desenha a grade vazia — seis cartões numerados em
+tratamentos, quatro em equipe. Isso responde a pergunta que o cliente
+realmente tem ("como fica com as minhas coisas aqui dentro?") sem que a gente
+precise inventar as coisas dele. Os cartões **não têm texto de exemplo**: nome
+de tratamento inventado numa demonstração vira, três reuniões depois, nome de
+tratamento no ar.
+
+---
+
+## 7. Movimento
+
+- **Reveal on scroll** (`Revelar`): sobe 18px e aparece, uma vez só, via
+  `IntersectionObserver`. Animação que reaparece a cada rolagem cansa e
+  denuncia "demonstração cheia de efeitos".
+- **Botões**: `translate-y` de 1px no `:active`. Imperceptível
+  conscientemente, sentido no dedo.
+- **Header**: transparente sobre o hero, ganha fundo depois de 24px de
+  rolagem. Uma barra sólida no topo cortaria a primeira dobra em duas.
+
+A classe `js-reveal` é posta pelo JavaScript, não no HTML. Se o bundle falhar,
+o CSS não esconde nada e a página aparece inteira — o caminho contrário
+transforma qualquer erro de script numa página em branco.
+
+Tudo respeita `prefers-reduced-motion`.
+
+---
+
+## 8. Mobile
+
+Não é desktop reduzido. Decisões tomadas para o celular primeiro:
+
+- **O telefone nunca entra no hambúrguer.** Fica na barra em qualquer largura.
+  Abaixo de 420px o rótulo encurta para "Ligar", mas o nome acessível do link
+  continua sendo o número inteiro.
+- **Alvo de toque mínimo de 44px** em tudo que é clicável, verificado
+  automaticamente por `npm run auditar`.
+- **`overflow-x: hidden`** no body e verificação de rolagem horizontal na
+  auditoria. Um elemento estourando a viewport já quebra a apresentação.
+- **`env(safe-area-inset-bottom)`** no botão flutuante e na faixa de
+  demonstração, senão a barra de início do iPhone come metade do alvo.
+- **Folga inferior no rodapé** calculada a partir dos elementos fixos — sem
+  ela, o botão flutuante tapa o último parágrafo.
+- **Mapa sob demanda**, por toque. O iframe do Google traz centenas de KB e um
+  terceiro para dentro da primeira renderização.
+
+---
+
+## 9. Verificação
+
+Nada aqui é "parece bom":
+
+```bash
+npm run contraste   # paleta contra WCAG 2.1 AA
+npm run auditar     # demonstração em 4 telas, aberta por file://
+npm run typecheck   # TypeScript estrito
+npm run pendencias  # o que ainda não é dado confirmado
+```
+
+A auditoria abre o arquivo por `file://` — do jeito exato que o cliente abre
+no celular — e reprova se houver imagem quebrada, rolagem horizontal, alvo de
+toque pequeno, âncora sem destino ou erro de console.

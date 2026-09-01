@@ -40,7 +40,7 @@
 
   html {
     /* Header fixo: âncoras não podem parar embaixo dele. */
-    scroll-padding-top: 6.5rem;
+    scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -51,7 +51,10 @@
   }
 
   body {
-    @apply bg-areia font-texto text-base text-tinta antialiased;
+    @apply bg-osso font-texto text-base text-tinta antialiased;
+    /* Trava contra rolagem horizontal — o briefing exige, e um único elemento
+       estourando a viewport no celular já quebra a demonstração inteira. */
+    overflow-x: hidden;
   }
 
   h1,
@@ -61,27 +64,27 @@
   }
 
   ::selection {
-    background-color: theme('colors.ocre');
+    background-color: theme('colors.bronze');
     color: #fff;
   }
 
   /*
    * Foco de teclado sempre visível — nunca `outline: none` sem substituto.
-   * São DUAS regras porque uma cor só não passa em todo fundo: sobre `verde`
-   * ou `tinta` o ocre cai para 2,83:1 e reprova o mínimo de 3:1.
+   * São DUAS regras porque uma cor só não passa em todo fundo: o bronze sobre
+   * `noite` cai para 3,28:1 e fica no limite; sobre escuro usamos champanhe.
    */
   :focus-visible {
-    outline: 3px solid theme('colors.ocre');
+    outline: 3px solid theme('colors.bronze');
     outline-offset: 2px;
     border-radius: 2px;
   }
 
   .sobre-escuro :focus-visible,
   .sobre-escuro:focus-visible {
-    outline-color: theme('colors.areia');
+    outline-color: theme('colors.champanhe');
   }
 
-  /* Respeita quem pediu menos movimento. Nada de animação decorativa aqui. */
+  /* Respeita quem pediu menos movimento. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -100,11 +103,15 @@
   }
 
   /*
-   * ELEMENTO DE ASSINATURA — a régua ocre.
-   * Ver DESIGN.md, seção 5. Único ornamento da página; custa zero requisição.
+   * ELEMENTO DE ASSINATURA — o filete de bronze.
+   * Único ornamento da página; custa zero requisição. Ver DESIGN.md.
    */
   .regua {
-    @apply block h-1 w-14 bg-ocre;
+    @apply block h-px w-16 bg-bronze;
+  }
+
+  .regua-clara {
+    @apply block h-px w-16 bg-champanhe;
   }
 
   /* Alvo de toque mínimo de 44x44px em tudo que é clicável. */
@@ -112,35 +119,39 @@
     @apply inline-flex min-h-toque items-center justify-center;
   }
 
+  /*
+   * Botões. O `translate-y` no :active dá o retorno tátil que o briefing pede
+   * sem virar efeito — 1px, imperceptível conscientemente, sentido no dedo.
+   */
   .btn-primario {
-    @apply alvo-toque shrink-0 gap-2 whitespace-nowrap rounded bg-ocre px-6 py-3
-           font-texto text-base font-semibold text-white transition-colors
-           hover:bg-tinta;
+    @apply alvo-toque shrink-0 gap-2 whitespace-nowrap rounded bg-bronze px-7 py-3.5
+           font-texto text-base font-semibold text-white transition-all
+           hover:bg-tinta active:translate-y-px;
   }
 
   .btn-secundario {
-    @apply alvo-toque shrink-0 gap-2 whitespace-nowrap rounded border-2
-           border-verde bg-transparent px-6 py-3 font-texto text-base font-semibold
-           text-verde transition-colors hover:bg-verde hover:text-areia;
+    @apply alvo-toque shrink-0 gap-2 whitespace-nowrap rounded border
+           border-petroleo/35 bg-transparent px-7 py-3.5 font-texto text-base
+           font-semibold text-petroleo transition-all hover:border-petroleo
+           hover:bg-petroleo hover:text-osso active:translate-y-px;
   }
 
   .btn-secundario-escuro {
-    @apply alvo-toque shrink-0 gap-2 whitespace-nowrap rounded border-2
-           border-areia bg-transparent px-6 py-3 font-texto text-base font-semibold
-           text-areia transition-colors hover:bg-areia hover:text-verde;
+    @apply alvo-toque shrink-0 gap-2 whitespace-nowrap rounded border
+           border-osso/45 bg-transparent px-7 py-3.5 font-texto text-base
+           font-semibold text-osso transition-all hover:border-osso
+           hover:bg-osso hover:text-noite active:translate-y-px;
   }
 
   /*
    * Link de pulo. Não usa `sr-only` + `not-sr-only`: `not-sr-only` zera o
-   * padding, e o alvo em foco ficava com 26px de altura — abaixo do mínimo de
-   * 44px. Aqui ele fica fora da tela e desce ao receber foco, com dimensões
-   * reais o tempo todo.
+   * padding e o alvo em foco fica abaixo dos 44px mínimos.
    */
   .link-pulo {
     @apply absolute left-4 z-[60] inline-flex min-h-toque items-center rounded
-           bg-ocre px-5 py-3 font-semibold text-white;
+           bg-bronze px-5 py-3 font-semibold text-white;
     top: -6rem;
-    transition: top 150ms;
+    transition: top 200ms;
   }
 
   .link-pulo:focus {
@@ -148,6 +159,58 @@
   }
 
   .etiqueta {
-    @apply font-texto text-micro font-semibold uppercase tracking-[0.14em];
+    @apply font-texto text-micro font-semibold uppercase tracking-[0.18em];
+  }
+
+  /*
+   * Trama diagonal dos marcadores de pendência, nas duas polaridades.
+   * Fica em CSS (e não em classe utilitária repetida) porque é usada em
+   * Pendente, Placeholder e nos módulos vazios.
+   */
+  .trama-clara {
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 7px,
+      rgba(107, 103, 95, 0.09) 7px,
+      rgba(107, 103, 95, 0.09) 14px
+    );
+  }
+
+  .trama-escura {
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 7px,
+      rgba(245, 242, 236, 0.12) 7px,
+      rgba(245, 242, 236, 0.12) 14px
+    );
+  }
+}
+
+@layer utilities {
+  /*
+   * Reveal on scroll. O estado inicial só é aplicado quando o JS confirma que
+   * o IntersectionObserver vai rodar (classe `js-reveal` no <html>): sem isso,
+   * um erro de script deixaria a página inteira invisível.
+   */
+  .js-reveal .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .js-reveal .reveal.visivel {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js-reveal .reveal {
+      opacity: 1;
+      transform: none;
+    }
   }
 }

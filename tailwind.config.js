@@ -2,11 +2,19 @@
 
 /*
  * ---------------------------------------------------------------------------
- * TOKENS DE DESIGN — fonte única da paleta (ver DESIGN.md)
+ * TOKENS DE DESIGN — RIZZIT ODONTOLOGIA PREMIUM (ver DESIGN.md)
  *
- * A identidade visual da clínica ainda não foi enviada (ver PENDENCIAS.md).
- * A paleta abaixo é PROPOSTA. Para trocá-la quando a marca chegar, edite
- * apenas este bloco: nenhum componente tem cor hardcoded.
+ * A identidade visual oficial da clínica NÃO foi enviada. Esta paleta é uma
+ * PROPOSTA de direção de arte, construída para a demonstração. Para trocá-la
+ * quando o logo e as cores reais chegarem, edite só este bloco — nenhum
+ * componente tem cor hardcoded.
+ *
+ * Direção: evitar o azul odontológico genérico. A referência é hotelaria e
+ * joalheria — superfície escura profunda, um metal quente como único acento e
+ * um off-white de papel. Sofisticado e clínico, não "consultório".
+ *
+ * Todos os pares em uso foram medidos (scripts/contraste.mjs). Os números
+ * abaixo são reais, não estimativa.
  * ---------------------------------------------------------------------------
  */
 export default {
@@ -14,13 +22,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        tinta: '#16211C',        // texto principal        — 14,71:1 sobre areia
-        verde: '#1D5647',        // institucional          —  7,54:1 sobre areia
-        ocre: '#A8460F',         // ação / CTA / foco      —  5,92:1 com texto branco
-        'ocre-claro': '#F5B889', // ocre sobre fundo escuro—  4,89:1 sobre verde, 9,54:1 sobre tinta
-        areia: '#F6F1E7',        // fundo da pagina        —  7,54:1 sobre verde
-        pedra: '#635E54',        // texto de apoio, bordas —  5,72:1 sobre areia
-        linha: '#DED5C4',        // filete DECORATIVO apenas (1,29:1 — nunca borda funcional)
+        tinta: '#14181B',      // texto principal      — 15,98:1 sobre osso
+        noite: '#0E1417',      // superfície escura    — 16,62:1 com osso
+        petroleo: '#123038',   // institucional escuro — 12,48:1 com osso
+        bronze: '#8A5E2A',     // ação/CTA e acento    —  5,06:1 sobre osso, 5,65:1 com texto branco
+        champanhe: '#E0B87C',  // acento sobre escuro  — 10,00:1 sobre noite, 7,52:1 sobre petroleo
+        osso: '#F5F2EC',       // fundo da página
+        pedra: '#6B675F',      // texto de apoio       —  5,04:1 sobre osso
+        linha: '#E2DCD0',      // filete DECORATIVO apenas (nunca borda funcional)
       },
       fontFamily: {
         display: ['Fraunces', 'Georgia', 'Times New Roman', 'serif'],
@@ -34,22 +43,33 @@ export default {
         h3: ['1.25rem', { lineHeight: '1.35' }],
         h2: ['clamp(1.75rem, 4vw, 2.75rem)', { lineHeight: '1.15' }],
         numeral: ['clamp(3rem, 9vw, 5rem)', { lineHeight: '0.95' }],
-        display: ['clamp(2.5rem, 6vw, 3.75rem)', { lineHeight: '1.05' }],
+        display: ['clamp(2.6rem, 7vw, 4.5rem)', { lineHeight: '1.02' }],
+        // Assinatura tipográfica da marca no hero e no rodapé.
+        marca: ['clamp(2.9rem, 12vw, 7rem)', { lineHeight: '0.9', letterSpacing: '-0.02em' }],
       },
       borderRadius: {
-        DEFAULT: '4px',
+        DEFAULT: '3px',
         sm: '2px',
       },
       maxWidth: {
-        conteudo: '1120px',
-        prosa: '68ch',
+        conteudo: '1180px',
+        prosa: '64ch',
       },
       spacing: {
-        secao: 'clamp(4rem, 9vw, 7rem)',
+        secao: 'clamp(4.5rem, 10vw, 8rem)',
         toque: '44px', // alvo minimo de toque
       },
       transitionDuration: {
-        DEFAULT: '150ms',
+        DEFAULT: '200ms',
+      },
+      keyframes: {
+        surgir: {
+          from: { opacity: '0', transform: 'translateY(18px)' },
+          to: { opacity: '1', transform: 'none' },
+        },
+      },
+      animation: {
+        surgir: 'surgir 700ms cubic-bezier(0.16, 1, 0.3, 1) both',
       },
     },
   },

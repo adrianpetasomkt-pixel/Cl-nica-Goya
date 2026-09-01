@@ -7,6 +7,12 @@ dist-ssr
 !.vscode/extensions.json
 npm-debug.log*
 
-# saída do arquivo de demonstração (regerar com: npm run demo)
+# build intermediário da demonstração (regerar com: npm run demo)
 .demo-build
-demo
+
+# capturas da auditoria (regerar com: npm run auditar)
+demo/auditoria
+
+# O arquivo de demonstração É versionado, ao contrário do resto do build:
+# ele é o entregável que vai para o cliente, é autocontido e precisa estar
+# recuperável sem rodar o projeto. Regerar com: npm run demo

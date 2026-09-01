@@ -1,7 +1,5 @@
-import { useId } from 'react';
 import type { ReactNode } from 'react';
 import { site, ehPendencia } from '../../data/site';
-import { Pendente } from './Pendente';
 
 /** Ícone de telefone. Decorativo — o rótulo textual carrega o significado. */
 function IconeTelefone() {
@@ -32,12 +30,13 @@ const CLASSES: Record<Variante, string> = {
   primario: 'btn-primario',
   secundario: 'btn-secundario',
   'secundario-escuro': 'btn-secundario-escuro',
-  texto: 'alvo-toque gap-2 font-semibold text-verde underline underline-offset-4 hover:text-ocre transition-colors',
+  texto:
+    'alvo-toque gap-2 font-semibold text-bronze underline underline-offset-4 transition-colors hover:text-tinta',
 };
 
 /**
- * CTA de ligação. O telefone é dado confirmado, então este é sempre um link
- * `tel:` real — abre o discador no celular.
+ * CTA de ligação. O telefone é dado confirmado por cinco fontes, então este é
+ * sempre um link `tel:` real — abre o discador no celular.
  */
 export function AcaoTelefone({
   variante = 'primario',
@@ -52,8 +51,8 @@ export function AcaoTelefone({
   return (
     <a
       href={site.contato.telefone.href}
-      /* Nome acessível idêntico ao rótulo visível padrão, e que contém as
-         duas variantes usadas no header ("Ligar" e o número). WCAG 2.5.3. */
+      /* Nome acessível que contém as duas variantes de rótulo usadas no
+         header ("Ligar" e o número completo). WCAG 2.5.3. */
       aria-label={`Ligar ${site.contato.telefone.exibicao}`}
       className={`${CLASSES[variante]} ${className}`}
     >
@@ -66,55 +65,51 @@ export function AcaoTelefone({
 /**
  * CTA de WhatsApp.
  *
- * O número de WhatsApp NÃO está confirmado — o telefone que temos é fixo.
- * Enquanto for pendência, este componente renderiza um botão desabilitado com
- * o marcador visível ao lado, nunca um link quebrado silencioso. Quando o
- * número chegar em `src/data/site.ts`, ele vira um link `wa.me` sozinho, sem
- * mudar nenhum componente.
+ * O número é uma PRESUNÇÃO, não um dado confirmado: o telefone público da
+ * clínica é celular, o que torna o WhatsApp plausível, mas ninguém confirmou
+ * que ele atende por lá. O link fica ativo — a demonstração precisa funcionar
+ * no celular do cliente — e a presunção está registrada em `site.ts` e sai no
+ * relatório `npm run pendencias`.
+ *
+ * Se algum dia o número virar `{{PENDENTE}}`, este componente degrada sozinho
+ * para um botão desabilitado, em vez de gerar um link quebrado silencioso.
  */
 export function AcaoWhatsApp({
   variante = 'secundario',
   rotulo,
   className = '',
-  escuro = false,
 }: {
   variante?: Variante;
   rotulo?: ReactNode;
   className?: string;
-  /** Para uso sobre superfície escura — o marcador precisa continuar legível. */
-  escuro?: boolean;
 }) {
-  const idNota = useId();
-  const numero = site.contato.whatsapp;
+  const whatsapp = site.contato.whatsapp;
 
-  if (!ehPendencia(numero)) {
+  if (ehPendencia(whatsapp)) {
     return (
-      <a
-        href={`https://wa.me/${numero.replace(/\D/g, '')}`}
-        className={`${CLASSES[variante]} ${className}`}
-        rel="noopener"
-      >
-        <IconeWhatsApp />
-        <span>{rotulo ?? 'Falar no WhatsApp'}</span>
-      </a>
-    );
-  }
-
-  return (
-    <div className={`flex w-fit max-w-full flex-col items-start gap-3 ${className}`}>
       <button
         type="button"
         aria-disabled="true"
-        aria-describedby={idNota}
-        className={`${CLASSES[variante]} cursor-not-allowed opacity-60`}
+        className={`${CLASSES[variante]} cursor-not-allowed opacity-60 ${className}`}
       >
         <IconeWhatsApp />
         <span>{rotulo ?? 'Falar no WhatsApp'}</span>
         <span className="sr-only">— indisponível, número ainda não informado</span>
       </button>
-      <Pendente id={idNota} escuro={escuro} className="max-w-prosa">
-        {numero}
-      </Pendente>
-    </div>
+    );
+  }
+
+  return (
+    <a
+      href={`https://wa.me/${whatsapp.valor}`}
+      className={`${CLASSES[variante]} ${className}`}
+      rel="noopener"
+      target="_blank"
+    >
+      <IconeWhatsApp />
+      <span>{rotulo ?? 'Falar no WhatsApp'}</span>
+    </a>
   );
 }
+
+export { IconeWhatsApp };
